@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Muutuja Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 50px;
+    }
+    .container {
+      display: flex;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+    .item {
+      width: 80px;
+      height: 80px;
+      border: 2px solid #666;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: grab;
+      border-radius: 10px;
+      background: #f9f9f9;
+      transition: opacity 0.3s ease;
+      font-size: 2rem;
+    }
+    .box {
+      width: 150px;
+      height: 150px;
+      border: 3px dashed #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fafafa;
+      border-radius: 12px;
+      font-size: 2rem;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .label {
+      margin-top: 10px;
+      font-size: 20px;
+      font-weight: bold;
+      text-align: center;
+    }
+    .hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .swap-animate {
+      transform: scale(1.2);
+      opacity: 0.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="apple" class="item" draggable="true">🍎</div>
+    <div id="number" class="item" draggable="true">3</div>
+    <div id="file" class="item" draggable="true">📄</div>
+  </div>
+
+  <div class="box" id="muutujaBox"></div>
+  <div class="label" id="muutujaLabel">muutuja</div>
+
+  <script>
+    const items = document.querySelectorAll('.item');
+    const box = document.getElementById('muutujaBox');
+    const label = document.getElementById('muutujaLabel');
+    let currentItem = null;
+
+    const itemMap = {
+      "apple": "õun",
+      "number": "arvuline väärtus",
+      "file": "failisisu"
+    };
+
+    items.forEach(item => {
+      item.addEventListener('dragstart', (e) => {
+        e.dataTransfer.setData('text/plain', item.id);
+      });
+    });
+
+    box.addEventListener('dragover', (e) => {
+      e.preventDefault();
+    });
+
+    box.addEventListener('drop', (e) => {
+      e.preventDefault();
+      const id = e.dataTransfer.getData('text/plain');
+      const draggedItem = document.getElementById(id);
+
+      if (!currentItem) {
+        currentItem = draggedItem;
+        draggedItem.classList.add('hidden');
+        animateSwap(draggedItem.textContent, itemMap[id]);
+      } else if (currentItem !== draggedItem) {
+        // Swap items
+        currentItem.classList.remove('hidden');
+        draggedItem.classList.add('hidden');
+        currentItem = draggedItem;
+        animateSwap(draggedItem.textContent, itemMap[id]);
+      }
+    });
+
+    function animateSwap(icon, labelText) {
+      box.classList.add('swap-animate');
+      setTimeout(() => {
+        box.textContent = icon;
+        label.textContent = labelText;
+        box.classList.remove('swap-animate');
+      }, 300);
+    }
+  </script>
+</body>
+</html>
