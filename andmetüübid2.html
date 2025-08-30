@@ -10,9 +10,12 @@
     padding: 50px;
     background-color: #121212;
     color: #e0e0e0;
+    text-align: center; /* center button and heading */
   }
   table {
     width: 100%;
+    max-width: 600px;
+    margin: 0 auto 20px auto; /* center table */
     border-collapse: collapse;
   }
   th {
@@ -55,6 +58,21 @@
     60% { transform: scale(1.3); opacity: 1; }
     100% { transform: scale(1); opacity: 1; }
   }
+  #reloadButton {
+    margin-top: 15px;
+    padding: 5px 10px;
+    font-size: 24px;
+    cursor: pointer;
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+    border: 1px solid #555;
+    border-radius: 5px;
+    transition: background-color 0.2s, transform 0.2s;
+  }
+  #reloadButton:hover {
+    background-color: #333;
+    transform: scale(1.1);
+  }
 </style>
 </head>
 <body>
@@ -70,6 +88,8 @@
   </thead>
   <tbody id="wordTable"></tbody>
 </table>
+
+<button id="reloadButton">🔄</button>
 
 <script>
 const categories = {
@@ -110,49 +130,60 @@ function getRandom(arr) {
 const tbody = document.getElementById('wordTable');
 const types = ["integer", "float", "string", "boolean"];
 
-// Generate one row per category
-types.forEach(type => {
-  const word = getRandom(categories[type]);
-  const tr = document.createElement('tr');
+// Function to generate table rows
+function generateRows() {
+  tbody.innerHTML = ''; // clear existing rows
 
-  const tdWord = document.createElement('td');
-  tdWord.textContent = word + " =";
-  tdWord.className = "muutuja";
+  types.forEach(type => {
+    const word = getRandom(categories[type]);
+    const tr = document.createElement('tr');
 
-  const tdInput = document.createElement('td');
-  const input = document.createElement('input');
-  input.type = 'text';
-  input.setAttribute('data-type', type);
-  tdInput.appendChild(input);
+    const tdWord = document.createElement('td');
+    tdWord.textContent = word + " =";
+    tdWord.className = "muutuja";
 
-  const tdResult = document.createElement('td');
-  const span = document.createElement('span');
-  span.className = 'result';
-  tdResult.appendChild(span);
+    const tdInput = document.createElement('td');
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.setAttribute('data-type', type);
+    tdInput.appendChild(input);
 
-  tr.appendChild(tdWord);
-  tr.appendChild(tdInput);
-  tr.appendChild(tdResult);
-  tbody.appendChild(tr);
+    const tdResult = document.createElement('td');
+    const span = document.createElement('span');
+    span.className = 'result';
+    tdResult.appendChild(span);
 
-  // Validate on blur with pop-in animation that stays
-  input.addEventListener('blur', () => {
-    const val = input.value.trim();
-    let isValid = false;
+    tr.appendChild(tdWord);
+    tr.appendChild(tdInput);
+    tr.appendChild(tdResult);
+    tbody.appendChild(tr);
 
-    if(type === "integer") isValid = /^-?\d+$/.test(val);
-    else if(type === "float") isValid = /^-?\d+(\.\d+)?$/.test(val);
-    else if(type === "string") isValid = val.length > 0 && isNaN(val);
-    else if(type === "boolean") isValid = val === "True" || val === "False";
+    input.addEventListener('blur', () => {
+      const val = input.value.trim();
+      let isValid = false;
 
-    span.textContent = isValid ? "✅" : "❌";
-    span.style.color = isValid ? "#0f0" : "#f33";
+      if(type === "integer") isValid = /^-?\d+$/.test(val);
+      else if(type === "float") isValid = /^-?\d+(\.\d+)?$/.test(val);
+      else if(type === "string") isValid = val.length > 0 && isNaN(val);
+      else if(type === "boolean") isValid = val === "True" || val === "False";
 
-    // Trigger pop-in animation once
-    span.style.animation = 'none';
-    span.offsetHeight; // force reflow
-    span.style.animation = 'popIn 0.3s ease forwards'; // forwards keeps end state
+      span.textContent = isValid ? "✅" : "❌";
+      span.style.color = isValid ? "#0f0" : "#f33";
+
+      span.style.animation = 'none';
+      span.offsetHeight;
+      span.style.animation = 'popIn 0.3s ease forwards';
+    });
   });
+}
+
+// Initial table generation
+generateRows();
+
+// Reload button
+const reloadBtn = document.getElementById('reloadButton');
+reloadBtn.addEventListener('click', () => {
+  generateRows(); // refresh table with new words
 });
 </script>
 
