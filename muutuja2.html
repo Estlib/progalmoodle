@@ -111,7 +111,18 @@
 
   <div class="label" id="muutujaLabel">muutuja</div>
 
+<button id="reloadButton" style="margin-top:15px; padding:5px 10px; font-size:18px;">🔄</button>
+
+
   <script>
+  const reloadBtn = document.getElementById('reloadButton');
+  reloadBtn.addEventListener('click', () => {
+    // Reset the jar and label
+    if (currentItem) currentItem.classList.remove('hidden');
+    jarContent.textContent = '';
+    label.textContent = 'muutuja';
+    currentItem = null;
+  });
     const items = document.querySelectorAll('.item');
     const jarContent = document.getElementById('jarContent');
     const box = document.getElementById('muutujaBox');
