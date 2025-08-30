@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Andmetüübid</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    padding: 50px;
+    background-color: #121212;
+    color: #e0e0e0;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  th {
+    text-align: left;
+    font-weight: bold;
+    padding: 5px;
+    border-bottom: 1px solid #444;
+  }
+  td {
+    padding: 5px;
+    border-bottom: 1px solid #333;
+  }
+  td.muutuja {
+    color: #aaa;
+  }
+  input {
+    width: 90%;
+    padding: 5px;
+    font-size: 1em;
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+    border: 1px solid #555;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  input:hover, input:focus {
+    border-color: #888;
+    box-shadow: 0 0 5px #888;
+    outline: none;
+  }
+  span.result {
+    font-size: 1.2em;
+    margin-left: 5px;
+    display: inline-block;
+    transform: scale(0);
+    opacity: 0;
+    animation-fill-mode: forwards;
+  }
+  @keyframes popIn {
+    0% { transform: scale(0); opacity: 0; }
+    60% { transform: scale(1.3); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+</style>
+</head>
+<body>
+
+<h1>Andmetüübid</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Muutuja</th>
+      <th>Muutuja sisu</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="wordTable"></tbody>
+</table>
+
+<script>
+const categories = {
+  integer: [
+    "vanaema_vanus",
+    "sinu_sünniaasta",
+    "päevade_arv_nädalas",
+    "õunte_arv_korvis",
+    "laste_arv_pere"
+  ],
+  float: [
+    "kogus_torti_kg",
+    "cm_tollides",
+    "piima_liitrites",
+    "kaugus_km_des",
+    "hind_eurodes"
+  ],
+  string: [
+    "sinu_nimi",
+    "lemmik_loom",
+    "motivatsioonilause",
+    "linn_kus_elad",
+    "lemmik_toiduaine"
+  ],
+  boolean: [
+    "kas_sul_on_kass?",
+    "kas_sa_oskad_ujuda?",
+    "kas_täna_sajab_vihma?",
+    "kas_sa_oled_täna_rõõmus?",
+    "kas_su_lemmikvärv_on_sinine?"
+  ]
+};
+
+function getRandom(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+const tbody = document.getElementById('wordTable');
+const types = ["integer", "float", "string", "boolean"];
+
+// Generate one row per category
+types.forEach(type => {
+  const word = getRandom(categories[type]);
+  const tr = document.createElement('tr');
+
+  const tdWord = document.createElement('td');
+  tdWord.textContent = word + " =";
+  tdWord.className = "muutuja";
+
+  const tdInput = document.createElement('td');
+  const input = document.createElement('input');
+  input.type = 'text';
+  input.setAttribute('data-type', type);
+  tdInput.appendChild(input);
+
+  const tdResult = document.createElement('td');
+  const span = document.createElement('span');
+  span.className = 'result';
+  tdResult.appendChild(span);
+
+  tr.appendChild(tdWord);
+  tr.appendChild(tdInput);
+  tr.appendChild(tdResult);
+  tbody.appendChild(tr);
+
+  // Validate on blur with pop-in animation that stays
+  input.addEventListener('blur', () => {
+    const val = input.value.trim();
+    let isValid = false;
+
+    if(type === "integer") isValid = /^-?\d+$/.test(val);
+    else if(type === "float") isValid = /^-?\d+(\.\d+)?$/.test(val);
+    else if(type === "string") isValid = val.length > 0 && isNaN(val);
+    else if(type === "boolean") isValid = val === "True" || val === "False";
+
+    span.textContent = isValid ? "✅" : "❌";
+    span.style.color = isValid ? "#0f0" : "#f33";
+
+    // Trigger pop-in animation once
+    span.style.animation = 'none';
+    span.offsetHeight; // force reflow
+    span.style.animation = 'popIn 0.3s ease forwards'; // forwards keeps end state
+  });
+});
+</script>
+
+</body>
+</html>
