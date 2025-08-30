@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Andmetüübid</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    padding: 50px;
+    background: #f9f9f9;
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  li {
+    font-weight: bold;
+    font-size: 1.2em;
+    margin: 15px 0;
+  }
+  input {
+    margin-left: 10px;
+    padding: 5px;
+    font-size: 1em;
+  }
+  span.result {
+    margin-left: 10px;
+    font-size: 1.2em;
+  }
+</style>
+</head>
+<body>
+
+<h1>Andmetüübid</h1>
+<ul id="wordList"></ul>
+
+<script>
+const categories = {
+  integer: [
+    "vanaema_vanus",
+    "sinu_sünniaasta",
+    "tordilõike_tordis",
+    "päevade_arv_nädalas",
+    "õunte_arv_korvis"
+  ],
+  float: [
+    "2_cm_tollides",
+    "rasvaprotsent_piimas",
+    "kaugus_kodust_km-tes",
+    "tänane_temperatuur_celsiuses",
+    "hind_eurodes"
+  ],
+  string: [
+    "sinu_nimi",
+    "lemmik_loom",
+    "lemmik_motivatsioonilause",
+    "linn_kus_elad",
+    "lemmiksnäkk"
+  ],
+  boolean: [
+    "kas_sul_on_kass?",
+    "kas_sa_oskad_ujuda?",
+    "kas_tana_sajab_vihma?",
+    "kas_sa_oled_tana_rõõmus?",
+    "kas_su_lemmikvarv_on_sinine?"
+  ]
+};
+
+// Function to get a random item
+function getRandom(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+const ul = document.getElementById('wordList');
+const types = ["integer", "float", "string", "boolean"];
+
+// Generate list items
+types.forEach(type => {
+  const li = document.createElement('li');
+  const word = getRandom(categories[type]);
+  li.innerHTML = `${word} = <input type="text" data-type="${type}"><span class="result"></span>`;
+  ul.appendChild(li);
+});
+
+// Input validation
+document.querySelectorAll('input').forEach(input => {
+  input.addEventListener('input', () => {
+    const val = input.value.trim();
+    const type = input.getAttribute('data-type');
+    const resultSpan = input.nextElementSibling;
+    let isValid = false;
+
+    if(type === "integer") {
+      isValid = /^-?\d+$/.test(val); // whole number
+    } else if(type === "float") {
+      isValid = /^-?\d+,\d+$/.test(val); // decimal with comma
+    } else if(type === "string") {
+      isValid = val.length > 0 && isNaN(val);
+    } else if(type === "boolean") {
+      isValid = val.toLowerCase() === "jah" || val.toLowerCase() === "ei";
+    }
+
+    resultSpan.textContent = isValid ? "✅" : "❌";
+  });
+});
+</script>
+
+</body>
+</html>
