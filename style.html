@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  body {
+    transition: background 0.3s, color 0.3s;
+    font-family: sans-serif;
+    margin: 0;
+    padding: 10px;
+  }
+
+  body.light {
+    background: #00ff00; /* bright green for light mode test */
+    color: #222222;
+  }
+
+  body.dark {
+    background: #1e1e1e; /* dark mode */
+    color: #eeeeee;
+  }
+
+  h3 {
+    margin-top: 0;
+  }
+</style>
+</head>
+<body class="light">
+  <div class="content">
+    <h3>Iframe Activity Test</h3>
+    <p>If you see bright green, it’s light mode. Dark gray = dark mode.</p>
+  </div>
+
+  <script>
+    function applyMode(dark) {
+      document.body.className = dark ? "dark" : "light";
+    }
+
+    // Listen for messages from parent page
+    window.addEventListener("message", e => {
+      if (e.data.darkMode !== undefined) {
+        applyMode(e.data.darkMode);
+      }
+    });
+
+    // Ask parent for current dark mode state on load
+    window.parent.postMessage("requestDarkMode", "*");
+  </script>
+</body>
+</html>
