@@ -1,5 +1,4 @@
-/* darkmode.css */
-
+/* Apply dark mode to main containers */
 .main-inner.dark-mode,
 .main-inner.dark-mode *,
 #page.dark-mode,
@@ -10,24 +9,31 @@
   transition: background 0.3s, color 0.3s, border-color 0.3s;
 }
 
+/* Links and buttons */
 .main-inner.dark-mode a,
 #page.dark-mode a { color: #66ccff !important; }
 
 .main-inner.dark-mode button,
 #page.dark-mode button { background-color: #2b2b2b !important; color: #eee !important; }
 
-/* Toggle knob and icons */
-#knobGroup { transition: transform 0.3s; }
-#sunIcon, #moonIcon { transition: opacity 0.3s; }
+/* Right-side drawer */
+#page.dark-mode .drawer,
+#page.dark-mode .drawer * {
+  background-color: #1e1e1e !important;
+  color: #eeeeee !important;
+  border-color: #333 !important;
+}
 
-/* Optional: scrollbars for dark mode */
+/* Scrollbars */
 .main-inner.dark-mode ::-webkit-scrollbar,
-#page.dark-mode ::-webkit-scrollbar {
+#page.dark-mode ::-webkit-scrollbar,
+#page.dark-mode .drawer ::-webkit-scrollbar {
   width: 10px;
 }
 
 .main-inner.dark-mode ::-webkit-scrollbar-thumb,
-#page.dark-mode ::-webkit-scrollbar-thumb {
+#page.dark-mode ::-webkit-scrollbar-thumb,
+#page.dark-mode .drawer ::-webkit-scrollbar-thumb {
   background-color: #555;
   border-radius: 5px;
 }
