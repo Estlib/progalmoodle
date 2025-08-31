@@ -17,12 +17,30 @@
 #page.dark-mode button { background-color: #2b2b2b !important; color: #eee !important; }
 
 /* Right-side drawer */
-#page.dark-mode .drawer,
-#page.dark-mode .drawer * {
+/* Drawer header */
+#page.dark-mode .drawerheader {
   background-color: #1e1e1e !important;
   color: #eeeeee !important;
   border-color: #333 !important;
+  transition: background 0.3s, color 0.3s, border-color 0.3s;
 }
+
+/* Drawer toggle button */
+#page.dark-mode .drawerheader .drawertoggle {
+  background-color: #2b2b2b !important;
+  color: #eee !important;
+  border-color: #444 !important;
+}
+
+/* Drawer content */
+#page.dark-mode .drawercontent,
+#page.dark-mode .drawercontent * {
+  background-color: #1e1e1e !important;
+  color: #eeeeee !important;
+  border-color: #333 !important;
+  transition: background 0.3s, color 0.3s, border-color 0.3s;
+}
+
 
 /* Scrollbars */
 .main-inner.dark-mode ::-webkit-scrollbar,
@@ -37,3 +55,4 @@
   background-color: #555;
   border-radius: 5px;
 }
+
