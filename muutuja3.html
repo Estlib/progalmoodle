@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Muutuja Jar Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 50px;
+
+      /* 🌙 Dark mode */
+      background-color: #121212;
+      color: #e0e0e0;
+    }
+    .container {
+      display: flex;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+    .item {
+      width: 80px;
+      height: 80px;
+      border: 1px solid #555;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: grab;
+      border-radius: 10px;
+      background: #1e1e1e;
+      transition: opacity 0.3s ease, background-color 0.2s;
+      font-size: 2rem;
+      color: #e0e0e0;
+    }
+    .item:hover {
+      background-color: #333;
+    }
+    .jar-container {
+      position: relative;
+      width: 200px;
+      height: 300px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .jar-container svg {
+      width: 100%;
+      height: 100%;
+    }
+    .jar-content {
+      position: absolute;
+      bottom: 20%;
+      font-size: 3rem;
+      pointer-events: none;
+      text-align: center;
+      width: 100%;
+    }
+    .label {
+      font-size: 20px;
+      font-weight: bold;
+      text-align: center;
+      color: #e0e0e0;
+    }
+    .hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .swap-animate {
+      transform: scale(1.2);
+      opacity: 0.5;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    #reloadButton {
+      margin-top: 15px;
+      padding: 5px 10px;
+      font-size: 18px;
+      cursor: pointer;
+      background-color: #1e1e1e;
+      color: #e0e0e0;
+      border: 1px solid #555;
+      border-radius: 5px;
+      transition: background-color 0.2s, transform 0.2s;
+    }
+    #reloadButton:hover {
+      background-color: #333;
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="apple" class="item" draggable="true">🍎</div>
+    <div id="number" class="item" draggable="true">3</div>
+    <div id="file" class="item" draggable="true">📄</div>
+  </div>
+
+  <div class="jar-container" id="muutujaBox">
+    <!-- ✅ Full SVG path kept intact -->
+    <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+         viewBox="0 0 846 1280" preserveAspectRatio="xMidYMid meet">
+      <g transform="translate(0,1280) scale(0.1,-0.1)" fill="#e0e0e0" stroke="#555" stroke-width="2">
+        <path d="M3885 12794 c-234 -12 -454 -27 -625 -45 -1251 -125 -2233 -465
+        -2653 -918 -134 -146 -194 -247 -222 -381 -18 -83 -34 -442 -35 -777 l0 -201
+        -46 -54 c-102 -119 -201 -296 -248 -446 -51 -164 -51 -132 -50 -4132 0 -2449
+        4 -3757 11 -3880 13 -217 32 -290 120 -461 175 -340 527 -644 1028 -889 669
+        -326 1430 -508 2510 -601 210 -18 1095 1 1435 31 490 43 1106 170 1575 325
+        259 85 397 141 620 251 321 157 535 304 735 504 184 183 288 345 361 560 28
+        85 33 114 42 280 7 119 11 1495 11 3880 1 3837 0 3965 -40 4100 -42 144 -139
+        331 -233 449 l-51 64 0 316 c0 528 -19 711 -88 847 -66 129 -258 316 -467 456
+        -126 84 -395 221 -555 284 -572 222 -1266 362 -2115 424 -140 11 -888 21
+        -1020 14z m860 -344 c672 -33 1231 -116 1735 -260 642 -184 1135 -470 1266
+        -734 37 -76 39 -84 39 -176 0 -91 -2 -100 -37 -171 -212 -424 -1024 -772
+        -2203 -943 -274 -39 -409 -52 -720 -66 -290 -13 -1145 -13 -1316 0 -857 67
+        -1670 260 -2199 524 -306 153 -489 305 -573 476 -30 60 -32 72 -32 170 0 102
+        1 109 37 181 84 169 273 322 599 485 592 295 1441 475 2449 517 179 8 770 6
+        955 -3z m3049 -1877 c-14 -141 -70 -239 -210 -373 -316 -300 -965 -547 -1825
+        -694 -405 -70 -607 -89 -1144 -106 -796 -26 -1241 -3 -1840 96 -838 137 -1562
+        409 -1878 704 -74 69 -154 175 -178 236 -13 34 -28 194 -17 194 4 0 9 -4 13
+        -10 12 -19 194 -149 290 -207 384 -231 908 -403 1635 -537 489 -90 776 -110
+        1595 -110 764 0 1023 14 1425 79 964 156 1683 414 2075 744 33 28 61 51 63 51
+        1 0 -1 -30 -4 -67z m-7183 -546 c114 -113 228 -207 330 -273 447 -287 1249
+        -527 2119 -634 360 -44 486 -51 1015 -57 561 -6 843 3 1166 37 1297 137 2333
+        515 2697 984 12 16 24 27 26 25 13 -15 79 -125 105 -176 l31 -62 0 -4037 0
+        -4036 -55 -106 c-122 -239 -299 -419 -594 -606 -561 -355 -1364 -597 -2351
+        -708 -158 -17 -266 -21 -747 -25 -569 -5 -794 2 -1071 32 -1140 127 -2146 502
+        -2628 980 -107 106 -177 203 -245 337 l-49 98 0 4035 0 4036 21 42 c16 33 122
+        216 125 217 0 0 47 -46 105 -103z"/>
+      </g>
+    </svg>
+    <div class="jar-content" id="jarContent"></div>
+  </div>
+
+  <div class="label" id="muutujaLabel">muutuja</div>
+
+  <button id="reloadButton">🔄</button>
+
+  <script>
+  const reloadBtn = document.getElementById('reloadButton');
+  reloadBtn.addEventListener('click', () => {
+    if (currentItem) currentItem.classList.remove('hidden');
+    jarContent.textContent = '';
+    label.textContent = 'muutuja';
+    currentItem = null;
+  });
+
+  const items = document.querySelectorAll('.item');
+  const jarContent = document.getElementById('jarContent');
+  const box = document.getElementById('muutujaBox');
+  const label = document.getElementById('muutujaLabel');
+  let currentItem = null;
+
+  const itemMap = {
+    "apple": "õun",
+    "number": "arvuline väärtus",
+    "file": "failisisu"
+  };
+
+  items.forEach(item => {
+    item.addEventListener('dragstart', (e) => {
+      e.dataTransfer.setData('text/plain', item.id);
+    });
+  });
+
+  box.addEventListener('dragover', (e) => e.preventDefault());
+
+  box.addEventListener('drop', (e) => {
+    e.preventDefault();
+    const id = e.dataTransfer.getData('text/plain');
+    const draggedItem = document.getElementById(id);
+
+    if (!currentItem) {
+      currentItem = draggedItem;
+      draggedItem.classList.add('hidden');
+      animateSwap(draggedItem.textContent, itemMap[id]);
+    } else if (currentItem !== draggedItem) {
+      currentItem.classList.remove('hidden');
+      draggedItem.classList.add('hidden');
+      currentItem = draggedItem;
+      animateSwap(draggedItem.textContent, itemMap[id]);
+    }
+  });
+
+  function animateSwap(icon, labelText) {
+    jarContent.classList.add('swap-animate');
+    setTimeout(() => {
+      jarContent.textContent = icon;
+      label.textContent = labelText;
+      jarContent.classList.remove('swap-animate');
+    }, 300);
+  }
+  </script>
+</body>
+</html>
