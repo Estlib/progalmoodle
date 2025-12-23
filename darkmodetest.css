@@ -143,8 +143,8 @@ body.dark-mode li.activity,
 html.dark-mode .activityiconcontainer,
 body.dark-mode .activityiconcontainer,
 #page.dark-mode .activityiconcontainer {
-  border-radius: 4px !important;
-  padding: .7rem !important;
+  /* border-radius: 4px !important;
+  padding: .7rem !important; */
 }
 
 
