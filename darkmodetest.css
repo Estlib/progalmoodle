@@ -304,3 +304,46 @@ body.dark-mode ::-webkit-scrollbar-thumb,
   color: var(--dm-text) !important;
   border-color: var(--dm-border) !important;
 }
+/* Hidden activities (teacher view) – remove white, keep "disabled" look */
+#page.dark-mode .activity-item.hiddenactivity,
+#page.dark-mode .activity.hiddenactivity,
+#page.dark-mode li.activity.hiddenactivity {
+  background-color: #141821 !important; /* dark but distinct */
+  border-color: var(--dm-border) !important;
+  opacity: 0.65;                       /* keep hidden feel */
+}
+
+/* Some themes apply bg to inner wrapper */
+#page.dark-mode .activity-item.hiddenactivity * {
+  background-color: transparent !important;
+}
+
+/* Links inside hidden activities */
+#page.dark-mode .activity-item.hiddenactivity a {
+  color: var(--dm-muted) !important;
+}
+/* =====================================================
+   DESCRIPTION BLOCKS (labels, section/activity text)
+   ===================================================== */
+
+#page.dark-mode .description,
+#page.dark-mode .description-content,
+#page.dark-mode .description-inner,
+#page.dark-mode .activity .description,
+#page.dark-mode .section .description {
+  background-color: transparent !important;
+  color: var(--dm-text) !important;
+  border: none !important;
+}
+
+/* Kill inline whites inside descriptions */
+#page.dark-mode .description [style*="background"],
+#page.dark-mode .description *[style*="background"] {
+  background-color: transparent !important;
+}
+
+/* Optional: subtle separation without white panels */
+#page.dark-mode .description {
+  padding: 6px 0;
+  opacity: 0.95;
+}
