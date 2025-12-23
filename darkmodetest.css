@@ -12,7 +12,7 @@
   --dm-surface: #151922;
   --dm-surface2: #1b2230;
   --dm-border: #333;
-  --dm-text: #FF00FF !important;
+  --dm-text: #EEEEEE !important;
   --dm-muted: #a7b0c0;
   --dm-link: #66ccff;
   --dm-button: #2b2b2b;
@@ -346,4 +346,97 @@ body.dark-mode ::-webkit-scrollbar-thumb,
 #page.dark-mode .description {
   padding: 6px 0;
   opacity: 0.95;
+}
+
+/* =========================================================
+   REMAINING WHITE KILL PATCH (Boost/Moodle core)
+   Append at VERY END of file
+   ========================================================= */
+
+/* Secondary navigation bar */
+#page.dark-mode .secondary-navigation .navigation {
+  background-color: var(--dm-surface) !important;
+  border-bottom-color: var(--dm-border) !important;
+}
+#page.dark-mode .secondary-navigation .navigation .nav-tabs,
+#page.dark-mode .secondary-navigation .navigation .nav-link {
+  background-color: transparent !important;
+  color: var(--dm-text) !important;
+}
+
+/* More menu (tabs across top of course) */
+#page.dark-mode .moremenu .nav-tabs {
+  background-color: var(--dm-surface) !important;
+}
+#page.dark-mode .moremenu .nav-link {
+  color: var(--dm-text) !important;
+}
+#page.dark-mode .moremenu .nav-link:hover,
+#page.dark-mode .moremenu .nav-link:focus,
+#page.dark-mode .moremenu .nav-link.active,
+#page.dark-mode .moremenu .nav-link.active:hover,
+#page.dark-mode .moremenu .nav-link.active:focus {
+  background-color: var(--dm-surface2) !important;
+  border-bottom-color: var(--dm-border) !important;
+}
+
+/* Course index (drawer) active row */
+#page.dark-mode .courseindex .courseindex-item.active {
+  background-color: var(--dm-surface2) !important;
+  border-color: var(--dm-border) !important;
+}
+#page.dark-mode .courseindex .courseindex-item:hover,
+#page.dark-mode .courseindex .courseindex-item:focus {
+  background-color: var(--dm-surface2) !important;
+}
+
+/* Dropdowns + list-groups (common white culprits) */
+#page.dark-mode .dropdown-menu {
+  background-color: var(--dm-surface) !important;
+  border-color: var(--dm-border) !important;
+}
+#page.dark-mode .dropdown-item {
+  background-color: transparent !important;
+  color: var(--dm-text) !important;
+}
+#page.dark-mode .dropdown-item:hover,
+#page.dark-mode .dropdown-item:focus {
+  background-color: var(--dm-surface2) !important;
+}
+
+#page.dark-mode .list-group,
+#page.dark-mode .list-group-item {
+  background-color: var(--dm-surface) !important;
+  border-color: var(--dm-border) !important;
+  color: var(--dm-text) !important;
+}
+#page.dark-mode .list-group-item:hover,
+#page.dark-mode .list-group-item:focus {
+  background-color: var(--dm-surface2) !important;
+}
+
+/* Image thumbnails (explicit white background in core CSS) */
+#page.dark-mode .img-thumbnail {
+  background-color: var(--dm-surface2) !important;
+  border-color: var(--dm-border) !important;
+}
+
+/* Utility “white” classes that sometimes appear in content/plugins */
+#page.dark-mode .bg-white,
+#page.dark-mode .bg-light {
+  background-color: var(--dm-surface) !important;
+  color: var(--dm-text) !important;
+}
+
+/* Popovers/tooltips/modals (often white by default) */
+#page.dark-mode .popover,
+#page.dark-mode .popover-body,
+#page.dark-mode .modal-content {
+  background-color: var(--dm-surface) !important;
+  color: var(--dm-text) !important;
+  border-color: var(--dm-border) !important;
+}
+#page.dark-mode .tooltip-inner {
+  background-color: var(--dm-surface2) !important;
+  color: var(--dm-text) !important;
 }
