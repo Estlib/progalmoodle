@@ -172,7 +172,7 @@ body.dark-mode .activityiconcontainer.communication,
 html.dark-mode .activityiconcontainer.content,
 body.dark-mode .activityiconcontainer.content,
 #page.dark-mode .activityiconcontainer.content {
-  background-color: var(--activitycontent, #399be2) !important;
+  background-color: var(--activitycontent, #39e27d) !important;
 }
 html.dark-mode .activityiconcontainer.interface,
 body.dark-mode .activityiconcontainer.interface,
