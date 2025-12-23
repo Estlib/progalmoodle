@@ -552,24 +552,48 @@ body.dark-mode ::-webkit-scrollbar-thumb,
   background: unset !important;
   filter: inherit !important;
 }
+/* Ensure activity icons stay original */
+#page.dark-mode img.activityicon {
+  filter: none !important;
+}
 /* =====================================================
-   FINAL SVG COLOR RESTORE (MUST BE LAST)
+   ACTIVITY ICON BACKPLATE COLORS (RECOMMENDED WAY)
    ===================================================== */
 
-/* Base icon color */
-#page.dark-mode img.activityicon {
-  filter: brightness(0) invert(1) !important;
+#page.dark-mode .activityiconcontainer {
+  border-radius: 4px !important;
+  border: none !important;
 }
 
-/* Per-activity tuning */
-#page.dark-mode .activityiconcontainer.content img.activityicon {
-  filter: invert(55%) sepia(82%) saturate(420%) hue-rotate(185deg) !important;
+/* Content (page, file, folder, book, url) */
+#page.dark-mode .activityiconcontainer.content {
+  background-color: #2563eb !important; /* blue */
 }
 
-#page.dark-mode .activityiconcontainer.communication img.activityicon {
-  filter: invert(60%) sepia(45%) saturate(360%) hue-rotate(140deg) !important;
+/* Communication (forum, chat) */
+#page.dark-mode .activityiconcontainer.communication {
+  background-color: #059669 !important; /* green */
 }
 
-#page.dark-mode .activityiconcontainer.assessment img.activityicon {
-  filter: invert(55%) sepia(50%) saturate(480%) hue-rotate(305deg) !important;
+/* Assessment (assignment, quiz, workshop) */
+#page.dark-mode .activityiconcontainer.assessment {
+  background-color: #7c3aed !important; /* purple */
+}
+
+/* Collaboration (wiki, database, glossary) */
+#page.dark-mode .activityiconcontainer.collaboration {
+  background-color: #d97706 !important; /* amber */
+}
+
+/* Interface / navigation */
+#page.dark-mode .activityiconcontainer.interface {
+  background-color: #64748b !important; /* slate */
+}
+
+/* Administration / meta */
+#page.dark-mode .activityiconcontainer.administration {
+  background-color: #dc2626 !important; /* red */
+}
+#page.dark-mode .activityiconcontainer {
+  transition: background-color 0.2s ease;
 }
