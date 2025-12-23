@@ -1,7 +1,5 @@
 /* =========================================================
-   MOODLE DARK MODE — FIXED ARCHITECTURE
-   No global background nuking
-   Activity icons work correctly
+   MOODLE DARK MODE — RECOMPILED (FRAME + CONTENT FIX)
    ========================================================= */
 
 
@@ -24,18 +22,24 @@
 
 
 /* =========================================================
-   1) DARK MODE — LAYOUT SURFACES ONLY
+   1) DARK MODE — FRAME + MAIN CONTENT (CRITICAL FIX)
    ========================================================= */
+#page.dark-mode,
 #page.dark-mode body,
 #page.dark-mode #page,
-#page.dark-mode .main-inner,
 #page.dark-mode #region-main,
-#page.dark-mode .course-content {
+#page.dark-mode .main-inner,
+#page.dark-mode .course-content,
+#page.dark-mode .page-content,
+#page.dark-mode #page-content {
   background-color: var(--dm-bg) !important;
   color: var(--dm-text) !important;
 }
 
-/* Drawers */
+
+/* =========================================================
+   2) DRAWERS / SIDE PANELS
+   ========================================================= */
 #page.dark-mode .drawer,
 #page.dark-mode .drawerheader,
 #page.dark-mode .drawercontent {
@@ -45,14 +49,14 @@
 
 
 /* =========================================================
-   2) GLOBAL SAFE DEFAULTS
+   3) SAFE GLOBALS (NO BACKGROUND PAINTING)
    ========================================================= */
 #page.dark-mode * {
   color: inherit;
   border-color: var(--dm-border) !important;
 }
 
-/* Never recolor SVG internals */
+/* SVG SAFETY */
 #page.dark-mode svg,
 #page.dark-mode svg * {
   fill: unset !important;
@@ -62,7 +66,7 @@
 
 
 /* =========================================================
-   3) LINKS
+   4) LINKS
    ========================================================= */
 #page.dark-mode a,
 #page.dark-mode a:visited {
@@ -74,7 +78,7 @@
 
 
 /* =========================================================
-   4) NAVBAR / HEADER
+   5) NAVBAR / HEADER
    ========================================================= */
 #page.dark-mode .navbar,
 #page.dark-mode .page-header,
@@ -85,18 +89,6 @@
 #page.dark-mode .breadcrumb-item,
 #page.dark-mode .breadcrumb-item a {
   color: var(--dm-muted) !important;
-}
-
-
-/* =========================================================
-   5) DRAWER DETAILS
-   ========================================================= */
-#page.dark-mode .drawerheader {
-  border-bottom: 1px solid var(--dm-border) !important;
-}
-#page.dark-mode .drawerheader .drawertoggle {
-  background-color: var(--dm-surface2) !important;
-  border: 1px solid var(--dm-border) !important;
 }
 
 
@@ -135,19 +127,20 @@
 }
 
 #page.dark-mode .sectionname,
-#page.dark-mode .course-section-header .sectionname {
+#page.dark-mode .course-section-header .sectionname,
+#page.dark-mode .activity .instancename {
   color: var(--dm-text) !important;
 }
 
 
 /* =========================================================
-   8) ✅ ACTIVITY ICON COLORS (NOW WORKING)
+   8) ACTIVITY ICON COLORS (CONFIRMED WORKING STRUCTURE)
    ========================================================= */
 #page.dark-mode .activityiconcontainer {
   border-radius: 999px !important;
 }
 
-/* Use Moodle’s own variables (confirmed present) */
+/* Moodle-provided activity palette */
 #page.dark-mode .activityiconcontainer.administration {
   background-color: var(--activityadministration) !important;
 }
@@ -240,7 +233,7 @@
 
 
 /* =========================================================
-   13) SCROLLBARS (CHROME / EDGE)
+   13) SCROLLBARS
    ========================================================= */
 #page.dark-mode ::-webkit-scrollbar {
   width: 10px;
