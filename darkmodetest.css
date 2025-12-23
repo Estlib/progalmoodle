@@ -544,3 +544,32 @@ body.dark-mode ::-webkit-scrollbar-thumb,
 #page.dark-mode .section_availability.course-description-item * {
   background-color: transparent !important;
 }
+/* Never touch SVG images / activity icons */
+#page.dark-mode img.activityicon,
+#page.dark-mode .activityiconcontainer,
+#page.dark-mode .activityiconcontainer * {
+  background-color: unset !important;
+  background: unset !important;
+  filter: inherit !important;
+}
+/* =====================================================
+   FINAL SVG COLOR RESTORE (MUST BE LAST)
+   ===================================================== */
+
+/* Base icon color */
+#page.dark-mode img.activityicon {
+  filter: brightness(0) invert(1) !important;
+}
+
+/* Per-activity tuning */
+#page.dark-mode .activityiconcontainer.content img.activityicon {
+  filter: invert(55%) sepia(82%) saturate(420%) hue-rotate(185deg) !important;
+}
+
+#page.dark-mode .activityiconcontainer.communication img.activityicon {
+  filter: invert(60%) sepia(45%) saturate(360%) hue-rotate(140deg) !important;
+}
+
+#page.dark-mode .activityiconcontainer.assessment img.activityicon {
+  filter: invert(55%) sepia(50%) saturate(480%) hue-rotate(305deg) !important;
+}
