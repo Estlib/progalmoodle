@@ -12,7 +12,7 @@
   --dm-surface: #151922;
   --dm-surface2: #1b2230;
   --dm-border: #333;
-  --dm-text: #FF00FF;
+  --dm-text: #FF00FF !important;
   --dm-muted: #a7b0c0;
   --dm-link: #66ccff;
   --dm-button: #2b2b2b;
