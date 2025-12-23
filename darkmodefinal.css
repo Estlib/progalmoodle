@@ -1,41 +1,43 @@
 /* =========================================================
-   MOODLE DARK MODE — FINAL CLEAN, ORDERED, NO DUPES
-   - No global background nukes on *
-   - Kills remaining white safely
-   - Fixes double borders (blocks/cards)
-   - Keeps icons NORMAL (no filters)
-   - Recolors icon BACKPLATES (last in file so they never vanish)
+   MOODLE DARK MODE — FINAL (BASED ON YOUR FILE)
+   - Removes duplicate/conflicting rules
+   - Keeps icons normal (no filters)
+   - Colors icon BACKPLATES reliably
+   - Kills remaining white areas without nuking icon plates
+   - Avoids double borders on blocks/cards
    ========================================================= */
 
 /* -----------------------------
-   0) TOKENS (available anywhere .dark-mode exists)
+   0) Palette
    ----------------------------- */
-html.dark-mode,
-body.dark-mode,
-#page.dark-mode {
+:root {
   --dm-bg: #1e1e1e;
   --dm-surface: #151922;
   --dm-surface2: #1b2230;
   --dm-border: #333;
   --dm-text: #eeeeee;
   --dm-muted: #a7b0c0;
-  --dm-link: #7dd3fc;
-
+  --dm-link: #66ccff;
+  --dm-button: #2b2b2b;
   --dm-input: #0b0f18;
 }
 
 /* -----------------------------
-   1) BASE SURFACES (frame + main)
+   1) Activate (any of these may receive .dark-mode)
    ----------------------------- */
 html.dark-mode,
 body.dark-mode,
 #page.dark-mode,
-html.dark-mode body,
-body.dark-mode #page {
+.main-inner.dark-mode,
+#region-main.dark-mode {
   background-color: var(--dm-bg) !important;
   color: var(--dm-text) !important;
 }
 
+/* Big surfaces */
+html.dark-mode #page,
+body.dark-mode #page,
+#page.dark-mode,
 html.dark-mode #region-main,
 body.dark-mode #region-main,
 #page.dark-mode #region-main,
@@ -56,16 +58,18 @@ body.dark-mode #page-content,
 }
 
 /* -----------------------------
-   2) SAFE GLOBAL DEFAULTS (NO background painting)
+   2) Safe globals (NO background painting!)
    ----------------------------- */
 html.dark-mode *,
 body.dark-mode *,
-#page.dark-mode * {
+#page.dark-mode *,
+.main-inner.dark-mode * {
   color: inherit;
   border-color: var(--dm-border) !important;
+  transition: background 0.3s, color 0.3s, border-color 0.3s;
 }
 
-/* Keep SVGs/images untouched (no forced fills, no filters) */
+/* Do not recolor SVG internals */
 html.dark-mode svg,
 html.dark-mode svg *,
 body.dark-mode svg,
@@ -77,25 +81,34 @@ body.dark-mode svg *,
   color: unset !important;
 }
 
+/* Keep activity icons normal */
 #page.dark-mode img.activityicon {
-  filter: none !important; /* icons stay original */
+  filter: none !important;
 }
 
 /* Links */
 html.dark-mode a,
 body.dark-mode a,
-#page.dark-mode a,
-html.dark-mode a:visited,
-body.dark-mode a:visited,
-#page.dark-mode a:visited {
+#page.dark-mode a {
   color: var(--dm-link) !important;
 }
 
+/* Buttons */
+html.dark-mode .btn,
+body.dark-mode .btn,
+#page.dark-mode .btn,
+html.dark-mode button,
+body.dark-mode button,
+#page.dark-mode button {
+  background-color: var(--dm-button) !important;
+  color: var(--dm-text) !important;
+  border-color: #444 !important;
+}
+
 /* -----------------------------
-   3) NAV / MENUS / DROPDOWNS (common white culprits)
+   3) Nav / menus / dropdowns (common white)
    ----------------------------- */
 #page.dark-mode .navbar,
-#page.dark-mode .page-header,
 #page.dark-mode .breadcrumb,
 #page.dark-mode .secondary-navigation .navigation,
 #page.dark-mode .moremenu .nav-tabs,
@@ -103,21 +116,21 @@ body.dark-mode a:visited,
 #page.dark-mode .tertiary-navigation {
   background-color: var(--dm-surface) !important;
   border-bottom-color: var(--dm-border) !important;
+  color: var(--dm-text) !important;
 }
 
 #page.dark-mode .moremenu .nav-link,
-#page.dark-mode .secondary-navigation .nav-link,
-#page.dark-mode .nav-tabs .nav-link {
+#page.dark-mode .secondary-navigation .navigation .nav-link {
   background-color: transparent !important;
   color: var(--dm-text) !important;
 }
 
 #page.dark-mode .moremenu .nav-link:hover,
 #page.dark-mode .moremenu .nav-link.active,
-#page.dark-mode .secondary-navigation .nav-link:hover,
-#page.dark-mode .secondary-navigation .nav-link.active {
+#page.dark-mode .secondary-navigation .navigation .nav-link:hover,
+#page.dark-mode .secondary-navigation .navigation .nav-link.active {
   background-color: var(--dm-surface2) !important;
-  border-color: var(--dm-border) !important;
+  border-bottom-color: var(--dm-border) !important;
 }
 
 #page.dark-mode .dropdown-menu,
@@ -137,26 +150,28 @@ body.dark-mode a:visited,
   background-color: var(--dm-surface2) !important;
 }
 
-/* List-groups often stay white */
+/* list groups */
 #page.dark-mode .list-group,
 #page.dark-mode .list-group-item {
   background-color: var(--dm-surface) !important;
   color: var(--dm-text) !important;
   border-color: var(--dm-border) !important;
 }
-#page.dark-mode .list-group-item:hover {
+#page.dark-mode .list-group-item:hover,
+#page.dark-mode .list-group-item:focus {
   background-color: var(--dm-surface2) !important;
 }
 
-/* Course index active row (drawer) */
+/* course index active */
 #page.dark-mode .courseindex .courseindex-item.active,
-#page.dark-mode .courseindex .courseindex-item:hover {
+#page.dark-mode .courseindex .courseindex-item:hover,
+#page.dark-mode .courseindex .courseindex-item:focus {
   background-color: var(--dm-surface2) !important;
   border-color: var(--dm-border) !important;
 }
 
 /* -----------------------------
-   4) DRAWERS
+   4) Drawers
    ----------------------------- */
 #page.dark-mode .drawer,
 #page.dark-mode .drawerheader,
@@ -166,14 +181,8 @@ body.dark-mode a:visited,
   border-color: var(--dm-border) !important;
 }
 
-#page.dark-mode .drawerheader {
-  border-bottom: 1px solid var(--dm-border) !important;
-}
-
 /* -----------------------------
-   5) BLOCKS / CARDS (FIX DOUBLE BORDERS)
-   Moodle nesting: .block > .card > .card-body
-   Only the OUTER .block should have a border.
+   5) Cards / Blocks (avoid double border)
    ----------------------------- */
 #page.dark-mode .block {
   background-color: var(--dm-surface2) !important;
@@ -189,7 +198,7 @@ body.dark-mode a:visited,
   box-shadow: none !important;
 }
 
-/* Non-block cards elsewhere */
+/* Non-block cards */
 #page.dark-mode .card {
   background-color: var(--dm-surface2) !important;
   border: 1px solid var(--dm-border) !important;
@@ -201,40 +210,37 @@ body.dark-mode a:visited,
 }
 
 /* -----------------------------
-   6) COURSE SECTIONS + ACTIVITIES (kill wrapper whites)
+   6) Course sections + activities
    ----------------------------- */
+/* kill white section content panels */
 #page.dark-mode .course-content ul.topics li.section .content,
 #page.dark-mode .course-content ul.weeks li.section .content,
-#page.dark-mode .course-content .section .content,
-#page.dark-mode .section,
-#page.dark-mode li.section,
-#page.dark-mode .course-section,
-#page.dark-mode .course-section-header {
+#page.dark-mode .course-content .section .content {
   background-color: transparent !important;
   border: none !important;
 }
 
-/* One clean “card” for activities */
+/* remove wrapper borders */
+#page.dark-mode .section,
+#page.dark-mode li.section,
+#page.dark-mode .course-section,
+#page.dark-mode .course-section-header {
+  border: none !important;
+  background-color: transparent !important;
+}
+
+/* activity cards */
 #page.dark-mode .activity,
 #page.dark-mode li.activity,
 #page.dark-mode .activity-item {
   background-color: var(--dm-surface2) !important;
   border: 1px solid var(--dm-border) !important;
   border-radius: 12px;
-}
-
-#page.dark-mode .activity,
-#page.dark-mode li.activity {
   padding: 10px 12px;
   margin: 8px 0;
 }
 
-/* Don’t let nested wrappers create borders */
-#page.dark-mode .activity * {
-  border-color: var(--dm-border) !important;
-}
-
-/* Hidden activities (teacher view) */
+/* hidden activity state */
 #page.dark-mode .activity-item.hiddenactivity,
 #page.dark-mode .activity.hiddenactivity,
 #page.dark-mode li.activity.hiddenactivity {
@@ -246,18 +252,18 @@ body.dark-mode a:visited,
   color: var(--dm-muted) !important;
 }
 
-/* Descriptions (labels, section/activity description text) */
+/* descriptions */
 #page.dark-mode .description,
 #page.dark-mode .description-content,
 #page.dark-mode .description-inner,
 #page.dark-mode .activity .description,
 #page.dark-mode .section .description {
   background-color: transparent !important;
-  border: none !important;
   color: var(--dm-text) !important;
+  border: none !important;
 }
 
-/* Section availability / course description item (restore border) */
+/* section availability row (restore border) */
 #page.dark-mode .section_availability.course-description-item {
   background-color: transparent !important;
   border: 1px solid var(--dm-border) !important;
@@ -269,7 +275,7 @@ body.dark-mode a:visited,
 }
 
 /* -----------------------------
-   7) FORMS / TABLES / ALERTS
+   7) Forms / tables / misc whites
    ----------------------------- */
 #page.dark-mode input,
 #page.dark-mode select,
@@ -285,42 +291,26 @@ body.dark-mode a:visited,
 
 #page.dark-mode table,
 #page.dark-mode .table,
-#page.dark-mode .generaltable {
+#page.dark-mode .generaltable,
+#page.dark-mode table td,
+#page.dark-mode table th {
   background-color: var(--dm-surface2) !important;
   color: var(--dm-text) !important;
   border-color: var(--dm-border) !important;
 }
 #page.dark-mode th {
   background-color: var(--dm-surface) !important;
-  color: var(--dm-text) !important;
 }
 #page.dark-mode td {
   background-color: transparent !important;
 }
 
-#page.dark-mode .alert {
-  background-color: var(--dm-surface2) !important;
-  color: var(--dm-text) !important;
-  border-color: var(--dm-border) !important;
-  border-left-width: 4px !important;
-}
-
-/* Utility bg whites (plugins/content) */
-#page.dark-mode .bg-white,
-#page.dark-mode .bg-light,
-#page.dark-mode .bg-body,
-#page.dark-mode .bg-body-tertiary {
-  background-color: var(--dm-surface) !important;
-  color: var(--dm-text) !important;
-}
-
-/* Image thumbnails have explicit white background in Bootstrap */
 #page.dark-mode .img-thumbnail {
   background-color: var(--dm-surface2) !important;
   border-color: var(--dm-border) !important;
 }
 
-/* MathJax overlays/menus can be white */
+/* MathJax overlays */
 #page.dark-mode .MathJax_Menu,
 #page.dark-mode #MathJax_ZoomOverlay,
 #page.dark-mode #MathJax_ZoomEventTrap {
@@ -330,46 +320,40 @@ body.dark-mode a:visited,
 }
 
 /* -----------------------------
-   8) WHITE-KILLER (INLINE STYLES) — BEFORE ICON COLORS
-   This removes teacher-inserted inline white backgrounds.
+   8) Inline white killer (SCOPED + EXCLUDES ICON PLATES)
+   IMPORTANT: this is what you needed, but your version hit icons too.
    ----------------------------- */
 #page.dark-mode #region-main *[style*="background"],
 #page.dark-mode #region-main *[style*="background-color"],
-#page.dark-mode #region-main *[style*="bgcolor"],
 #page.dark-mode .drawercontent *[style*="background"],
-#page.dark-mode .drawercontent *[style*="background-color"],
-#page.dark-mode .drawercontent *[style*="bgcolor"] {
+#page.dark-mode .drawercontent *[style*="background-color"] {
   background-color: transparent !important;
   background: transparent !important;
 }
 
 /* -----------------------------
-   9) ICON BACKPLATE COLORS — MUST BE LAST
-   (This is what was “disappearing” before.)
-   Icons remain normal; only the plate is colored.
+   9) Final “white eliminator” — but DO NOT touch icon plates
+   (replaces your old: #region-main * { background-color: transparent })
    ----------------------------- */
-#page.dark-mode .activityiconcontainer {
-  /* keep Moodle default “tile” look */
-  border-radius: 4px !important;
-  border: none !important;
+#page.dark-mode #region-main :not(.activityiconcontainer):not(.activityiconcontainer *) {
+  /* removes leftover white panels without killing icon backplates */
+  background-color: transparent !important;
 }
 
-/* Use any Moodle vars if present; fall back to our palette */
-#page.dark-mode .activityiconcontainer.administration {
-  background-color: var(--activityadministration, #dc2626) !important;
+/* -----------------------------
+   10) ICON BACKPLATE COLORS — MUST BE LAST
+   Icons stay normal; only backgrounds are colored.
+   ----------------------------- */
+#page.dark-mode .activityiconcontainer {
+  border-radius: 4px !important;
+  border: none !important;
+  transition: background-color 0.2s ease;
 }
-#page.dark-mode .activityiconcontainer.assessment {
-  background-color: var(--activityassessment, #7c3aed) !important;
-}
-#page.dark-mode .activityiconcontainer.collaboration {
-  background-color: var(--activitycollaboration, #d97706) !important;
-}
-#page.dark-mode .activityiconcontainer.communication {
-  background-color: var(--activitycommunication, #059669) !important;
-}
-#page.dark-mode .activityiconcontainer.content {
-  background-color: var(--activitycontent, #2563eb) !important;
-}
-#page.dark-mode .activityiconcontainer.interface {
-  background-color: var(--activityinterface, #64748b) !important;
-}
+
+/* Picked colors (edit freely) */
+#page.dark-mode .activityiconcontainer.content         { background-color: #2563eb !important; }
+#page.dark-mode .activityiconcontainer.communication   { background-color: #059669 !important; }
+#page.dark-mode .activityiconcontainer.assessment      { background-color: #7c3aed !important; }
+#page.dark-mode .activityiconcontainer.collaboration   { background-color: #d97706 !important; }
+#page.dark-mode .activityiconcontainer.interface       { background-color: #64748b !important; }
+#page.dark-mode .activityiconcontainer.administration  { background-color: #dc2626 !important; }
