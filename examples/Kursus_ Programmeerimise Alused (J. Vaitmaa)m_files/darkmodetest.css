@@ -1,62 +1,64 @@
 /* =========================================================
-   MOODLE DARK MODE — RECOMPILED (FRAME + CONTENT FIX)
+   MOODLE DARK MODE — FIXED & ROBUST
+   - No global background nuking on *
+   - Darkens the correct layout surfaces
+   - Still allows colored components (activity icons, badges, etc.)
+   - Supports dark-mode class on: body/html/#page/#region-main/.main-inner
    ========================================================= */
 
-
-/* =========================================================
-   0) THEME TOKENS
-   ========================================================= */
-#page.dark-mode {
+/* ---- palette ---- */
+:root {
   --dm-bg: #1e1e1e;
   --dm-surface: #151922;
   --dm-surface2: #1b2230;
   --dm-border: #333;
   --dm-text: #eeeeee;
   --dm-muted: #a7b0c0;
-
-  --dm-link: #7dd3fc;
-  --dm-primary: #2563eb;
-  --dm-danger: #ef4444;
-  --dm-warn: #f59e0b;
+  --dm-link: #66ccff;
+  --dm-button: #2b2b2b;
 }
 
-
-/* =========================================================
-   1) DARK MODE — FRAME + MAIN CONTENT (CRITICAL FIX)
-   ========================================================= */
+/* ---- activate when ANY of these has .dark-mode ---- */
+html.dark-mode,
+body.dark-mode,
 #page.dark-mode,
-#page.dark-mode body,
-#page.dark-mode #page,
-#page.dark-mode #region-main,
-#page.dark-mode .main-inner,
-#page.dark-mode .course-content,
-#page.dark-mode .page-content,
-#page.dark-mode #page-content {
+.main-inner.dark-mode,
+#region-main.dark-mode {
   background-color: var(--dm-bg) !important;
   color: var(--dm-text) !important;
 }
 
-
-/* =========================================================
-   2) DRAWERS / SIDE PANELS
-   ========================================================= */
-#page.dark-mode .drawer,
-#page.dark-mode .drawerheader,
-#page.dark-mode .drawercontent {
-  background-color: var(--dm-surface) !important;
+/* ---- darken big surfaces (not every element) ---- */
+html.dark-mode #page,
+body.dark-mode #page,
+#page.dark-mode,
+.main-inner.dark-mode,
+#region-main.dark-mode,
+html.dark-mode #region-main,
+body.dark-mode #region-main,
+html.dark-mode .main-inner,
+body.dark-mode .main-inner,
+html.dark-mode .course-content,
+body.dark-mode .course-content {
+  background-color: var(--dm-bg) !important;
   color: var(--dm-text) !important;
 }
 
-
-/* =========================================================
-   3) SAFE GLOBALS (NO BACKGROUND PAINTING)
-   ========================================================= */
-#page.dark-mode * {
+/* ---- safe globals: text + borders only ---- */
+html.dark-mode *,
+body.dark-mode *,
+#page.dark-mode *,
+.main-inner.dark-mode * {
   color: inherit;
   border-color: var(--dm-border) !important;
+  transition: background 0.3s, color 0.3s, border-color 0.3s;
 }
 
-/* SVG SAFETY */
+/* ---- DO NOT recolor SVG internals ---- */
+html.dark-mode svg,
+html.dark-mode svg *,
+body.dark-mode svg,
+body.dark-mode svg *,
 #page.dark-mode svg,
 #page.dark-mode svg * {
   fill: unset !important;
@@ -64,60 +66,71 @@
   color: unset !important;
 }
 
-
-/* =========================================================
-   4) LINKS
-   ========================================================= */
-#page.dark-mode a,
-#page.dark-mode a:visited {
+/* ---- links ---- */
+html.dark-mode a,
+body.dark-mode a,
+#page.dark-mode a {
   color: var(--dm-link) !important;
 }
-#page.dark-mode a:hover {
-  filter: brightness(1.15);
+
+/* ---- buttons ---- */
+html.dark-mode .btn,
+body.dark-mode .btn,
+#page.dark-mode .btn,
+html.dark-mode button,
+body.dark-mode button,
+#page.dark-mode button {
+  background-color: var(--dm-button) !important;
+  color: var(--dm-text) !important;
+  border-color: #444 !important;
 }
 
-
-/* =========================================================
-   5) NAVBAR / HEADER
-   ========================================================= */
+/* ---- NAV / header ---- */
+html.dark-mode .navbar,
+body.dark-mode .navbar,
 #page.dark-mode .navbar,
-#page.dark-mode .page-header,
+html.dark-mode .breadcrumb,
+body.dark-mode .breadcrumb,
 #page.dark-mode .breadcrumb {
   background-color: var(--dm-surface) !important;
   border-bottom: 1px solid var(--dm-border) !important;
 }
-#page.dark-mode .breadcrumb-item,
-#page.dark-mode .breadcrumb-item a {
-  color: var(--dm-muted) !important;
-}
 
-
-/* =========================================================
-   6) BLOCKS / CARDS
-   ========================================================= */
-#page.dark-mode .block,
-#page.dark-mode .card,
-#page.dark-mode .card-body {
-  background-color: var(--dm-surface2) !important;
-  border: 1px solid var(--dm-border) !important;
-  border-radius: 12px;
-}
-#page.dark-mode .block-header,
-#page.dark-mode .card-header {
+/* ---- drawers ---- */
+html.dark-mode .drawer,
+body.dark-mode .drawer,
+#page.dark-mode .drawer,
+html.dark-mode .drawerheader,
+body.dark-mode .drawerheader,
+#page.dark-mode .drawerheader,
+html.dark-mode .drawercontent,
+body.dark-mode .drawercontent,
+#page.dark-mode .drawercontent {
   background-color: var(--dm-surface) !important;
-  border-bottom: 1px solid var(--dm-border) !important;
+  color: var(--dm-text) !important;
 }
 
+/* IMPORTANT: don't blanket-set drawercontent * background.
+   That’s what kills colored components inside drawers. */
 
-/* =========================================================
-   7) COURSE SECTIONS & ACTIVITIES
-   ========================================================= */
-#page.dark-mode .section,
-#page.dark-mode .course-section-header {
-  background: transparent !important;
+/* ---- cards/blocks ---- */
+html.dark-mode .card,
+body.dark-mode .card,
+#page.dark-mode .card,
+html.dark-mode .block,
+body.dark-mode .block,
+#page.dark-mode .block {
+  background-color: var(--dm-surface2) !important;
+  /* border: 1px solid var(--dm-border) !important;
+  border-radius: 12px; */
 }
 
+/* ---- activities (course items) ---- */
+html.dark-mode .activity,
+body.dark-mode .activity,
 #page.dark-mode .activity,
+html.dark-mode li.activity,
+body.dark-mode li.activity,
 #page.dark-mode li.activity {
   background-color: var(--dm-surface2) !important;
   border: 1px solid var(--dm-border) !important;
@@ -126,125 +139,56 @@
   margin: 8px 0;
 }
 
-#page.dark-mode .sectionname,
-#page.dark-mode .course-section-header .sectionname,
-#page.dark-mode .activity .instancename {
-  color: var(--dm-text) !important;
-}
-
-
-/* =========================================================
-   8) ACTIVITY ICON COLORS (CONFIRMED WORKING STRUCTURE)
-   ========================================================= */
+/* ---- activity icon plates: keep Moodle’s colors ---- */
+html.dark-mode .activityiconcontainer,
+body.dark-mode .activityiconcontainer,
 #page.dark-mode .activityiconcontainer {
-  border-radius: 999px !important;
+  /* border-radius: 4px !important;
+  padding: .7rem !important; */
 }
 
-/* Moodle-provided activity palette */
+
+/* Use Moodle vars (as seen in your computed styles); fall back if missing */
+html.dark-mode .activityiconcontainer.administration,
+body.dark-mode .activityiconcontainer.administration,
 #page.dark-mode .activityiconcontainer.administration {
-  background-color: var(--activityadministration) !important;
+  background-color: var(--activityadministration, #5d63f6) !important;
 }
+html.dark-mode .activityiconcontainer.assessment,
+body.dark-mode .activityiconcontainer.assessment,
 #page.dark-mode .activityiconcontainer.assessment {
-  background-color: var(--activityassessment) !important;
+  background-color: var(--activityassessment, #eb66a2) !important;
 }
+html.dark-mode .activityiconcontainer.collaboration,
+body.dark-mode .activityiconcontainer.collaboration,
 #page.dark-mode .activityiconcontainer.collaboration {
-  background-color: var(--activitycollaboration) !important;
+  background-color: var(--activitycollaboration, #f7634d) !important;
 }
+html.dark-mode .activityiconcontainer.communication,
+body.dark-mode .activityiconcontainer.communication,
 #page.dark-mode .activityiconcontainer.communication {
-  background-color: var(--activitycommunication) !important;
+  background-color: var(--activitycommunication, #11a676) !important;
 }
+html.dark-mode .activityiconcontainer.content,
+body.dark-mode .activityiconcontainer.content,
 #page.dark-mode .activityiconcontainer.content {
-  background-color: var(--activitycontent) !important;
+  background-color: var(--activitycontent, #399be2) !important;
 }
+html.dark-mode .activityiconcontainer.interface,
+body.dark-mode .activityiconcontainer.interface,
 #page.dark-mode .activityiconcontainer.interface {
-  background-color: var(--activityinterface) !important;
+  background-color: var(--activityinterface, #a378ff) !important;
 }
 
-
-/* =========================================================
-   9) BUTTONS
-   ========================================================= */
-#page.dark-mode .btn {
-  background-color: var(--dm-surface2) !important;
-  border: 1px solid var(--dm-border) !important;
-  color: var(--dm-text) !important;
-}
-#page.dark-mode .btn-primary {
-  background-color: var(--dm-primary) !important;
-  border-color: #1d4ed8 !important;
-  color: #fff !important;
-}
-#page.dark-mode .btn-danger {
-  background-color: var(--dm-danger) !important;
-  border-color: #b91c1c !important;
-  color: #fff !important;
-}
-
-
-/* =========================================================
-   10) FORMS
-   ========================================================= */
-#page.dark-mode input,
-#page.dark-mode select,
-#page.dark-mode textarea,
-#page.dark-mode .form-control {
-  background-color: #0b0f18 !important;
-  color: var(--dm-text) !important;
-  border: 1px solid var(--dm-border) !important;
-}
-#page.dark-mode ::placeholder {
-  color: var(--dm-muted) !important;
-}
-
-
-/* =========================================================
-   11) TABLES
-   ========================================================= */
-#page.dark-mode table,
-#page.dark-mode .table {
-  background-color: var(--dm-surface2) !important;
-  color: var(--dm-text) !important;
-}
-#page.dark-mode th {
-  background-color: var(--dm-surface) !important;
-}
-#page.dark-mode td {
-  background-color: transparent !important;
-}
-
-
-/* =========================================================
-   12) ALERTS
-   ========================================================= */
-#page.dark-mode .alert {
-  background-color: var(--dm-surface2) !important;
-  border: 1px solid var(--dm-border) !important;
-  border-left-width: 4px !important;
-}
-#page.dark-mode .alert-success {
-  border-left-color: #22c55e !important;
-}
-#page.dark-mode .alert-warning {
-  border-left-color: var(--dm-warn) !important;
-}
-#page.dark-mode .alert-danger {
-  border-left-color: var(--dm-danger) !important;
-}
-
-
-/* =========================================================
-   13) SCROLLBARS
-   ========================================================= */
+/* ---- scrollbars ---- */
+html.dark-mode ::-webkit-scrollbar,
+body.dark-mode ::-webkit-scrollbar,
 #page.dark-mode ::-webkit-scrollbar {
   width: 10px;
 }
-#page.dark-mode ::-webkit-scrollbar-track {
-  background-color: var(--dm-bg);
-}
+html.dark-mode ::-webkit-scrollbar-thumb,
+body.dark-mode ::-webkit-scrollbar-thumb,
 #page.dark-mode ::-webkit-scrollbar-thumb {
-  background-color: #3b465a;
-  border-radius: 6px;
-}
-#page.dark-mode ::-webkit-scrollbar-thumb:hover {
-  background-color: #4b5a74;
+  background-color: #555;
+  border-radius: 5px;
 }
