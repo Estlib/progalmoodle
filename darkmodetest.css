@@ -529,3 +529,18 @@ body.dark-mode ::-webkit-scrollbar-thumb,
 #page.dark-mode .courseindex * {
   background-color: transparent !important;
 }
+/* =====================================================
+   Section availability / course description item
+   ===================================================== */
+
+#page.dark-mode .section_availability.course-description-item {
+  background-color: transparent !important;     /* stay dark */
+  border: 1px solid var(--dm-border) !important; /* restore border */
+  border-radius: 8px;
+  color: var(--dm-text) !important;
+}
+
+/* Prevent inner wrappers from reintroducing white */
+#page.dark-mode .section_availability.course-description-item * {
+  background-color: transparent !important;
+}
