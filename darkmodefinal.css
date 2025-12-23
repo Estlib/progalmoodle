@@ -1,0 +1,375 @@
+/* =========================================================
+   MOODLE DARK MODE — FINAL CLEAN, ORDERED, NO DUPES
+   - No global background nukes on *
+   - Kills remaining white safely
+   - Fixes double borders (blocks/cards)
+   - Keeps icons NORMAL (no filters)
+   - Recolors icon BACKPLATES (last in file so they never vanish)
+   ========================================================= */
+
+/* -----------------------------
+   0) TOKENS (available anywhere .dark-mode exists)
+   ----------------------------- */
+html.dark-mode,
+body.dark-mode,
+#page.dark-mode {
+  --dm-bg: #1e1e1e;
+  --dm-surface: #151922;
+  --dm-surface2: #1b2230;
+  --dm-border: #333;
+  --dm-text: #eeeeee;
+  --dm-muted: #a7b0c0;
+  --dm-link: #7dd3fc;
+
+  --dm-input: #0b0f18;
+}
+
+/* -----------------------------
+   1) BASE SURFACES (frame + main)
+   ----------------------------- */
+html.dark-mode,
+body.dark-mode,
+#page.dark-mode,
+html.dark-mode body,
+body.dark-mode #page {
+  background-color: var(--dm-bg) !important;
+  color: var(--dm-text) !important;
+}
+
+html.dark-mode #region-main,
+body.dark-mode #region-main,
+#page.dark-mode #region-main,
+html.dark-mode .main-inner,
+body.dark-mode .main-inner,
+#page.dark-mode .main-inner,
+html.dark-mode .course-content,
+body.dark-mode .course-content,
+#page.dark-mode .course-content,
+html.dark-mode .page-content,
+body.dark-mode .page-content,
+#page.dark-mode .page-content,
+html.dark-mode #page-content,
+body.dark-mode #page-content,
+#page.dark-mode #page-content {
+  background-color: var(--dm-bg) !important;
+  color: var(--dm-text) !important;
+}
+
+/* -----------------------------
+   2) SAFE GLOBAL DEFAULTS (NO background painting)
+   ----------------------------- */
+html.dark-mode *,
+body.dark-mode *,
+#page.dark-mode * {
+  color: inherit;
+  border-color: var(--dm-border) !important;
+}
+
+/* Keep SVGs/images untouched (no forced fills, no filters) */
+html.dark-mode svg,
+html.dark-mode svg *,
+body.dark-mode svg,
+body.dark-mode svg *,
+#page.dark-mode svg,
+#page.dark-mode svg * {
+  fill: unset !important;
+  stroke: unset !important;
+  color: unset !important;
+}
+
+#page.dark-mode img.activityicon {
+  filter: none !important; /* icons stay original */
+}
+
+/* Links */
+html.dark-mode a,
+body.dark-mode a,
+#page.dark-mode a,
+html.dark-mode a:visited,
+body.dark-mode a:visited,
+#page.dark-mode a:visited {
+  color: var(--dm-link) !important;
+}
+
+/* -----------------------------
+   3) NAV / MENUS / DROPDOWNS (common white culprits)
+   ----------------------------- */
+#page.dark-mode .navbar,
+#page.dark-mode .page-header,
+#page.dark-mode .breadcrumb,
+#page.dark-mode .secondary-navigation .navigation,
+#page.dark-mode .moremenu .nav-tabs,
+#page.dark-mode .primary-navigation,
+#page.dark-mode .tertiary-navigation {
+  background-color: var(--dm-surface) !important;
+  border-bottom-color: var(--dm-border) !important;
+}
+
+#page.dark-mode .moremenu .nav-link,
+#page.dark-mode .secondary-navigation .nav-link,
+#page.dark-mode .nav-tabs .nav-link {
+  background-color: transparent !important;
+  color: var(--dm-text) !important;
+}
+
+#page.dark-mode .moremenu .nav-link:hover,
+#page.dark-mode .moremenu .nav-link.active,
+#page.dark-mode .secondary-navigation .nav-link:hover,
+#page.dark-mode .secondary-navigation .nav-link.active {
+  background-color: var(--dm-surface2) !important;
+  border-color: var(--dm-border) !important;
+}
+
+#page.dark-mode .dropdown-menu,
+#page.dark-mode .popover,
+#page.dark-mode .modal-content {
+  background-color: var(--dm-surface) !important;
+  color: var(--dm-text) !important;
+  border-color: var(--dm-border) !important;
+}
+
+#page.dark-mode .dropdown-item {
+  background-color: transparent !important;
+  color: var(--dm-text) !important;
+}
+#page.dark-mode .dropdown-item:hover,
+#page.dark-mode .dropdown-item:focus {
+  background-color: var(--dm-surface2) !important;
+}
+
+/* List-groups often stay white */
+#page.dark-mode .list-group,
+#page.dark-mode .list-group-item {
+  background-color: var(--dm-surface) !important;
+  color: var(--dm-text) !important;
+  border-color: var(--dm-border) !important;
+}
+#page.dark-mode .list-group-item:hover {
+  background-color: var(--dm-surface2) !important;
+}
+
+/* Course index active row (drawer) */
+#page.dark-mode .courseindex .courseindex-item.active,
+#page.dark-mode .courseindex .courseindex-item:hover {
+  background-color: var(--dm-surface2) !important;
+  border-color: var(--dm-border) !important;
+}
+
+/* -----------------------------
+   4) DRAWERS
+   ----------------------------- */
+#page.dark-mode .drawer,
+#page.dark-mode .drawerheader,
+#page.dark-mode .drawercontent {
+  background-color: var(--dm-surface) !important;
+  color: var(--dm-text) !important;
+  border-color: var(--dm-border) !important;
+}
+
+#page.dark-mode .drawerheader {
+  border-bottom: 1px solid var(--dm-border) !important;
+}
+
+/* -----------------------------
+   5) BLOCKS / CARDS (FIX DOUBLE BORDERS)
+   Moodle nesting: .block > .card > .card-body
+   Only the OUTER .block should have a border.
+   ----------------------------- */
+#page.dark-mode .block {
+  background-color: var(--dm-surface2) !important;
+  border: 1px solid var(--dm-border) !important;
+  border-radius: 12px;
+}
+
+#page.dark-mode .block .card,
+#page.dark-mode .block .card-body,
+#page.dark-mode .block .card-header {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Non-block cards elsewhere */
+#page.dark-mode .card {
+  background-color: var(--dm-surface2) !important;
+  border: 1px solid var(--dm-border) !important;
+  border-radius: 12px;
+}
+#page.dark-mode .card-header {
+  background-color: var(--dm-surface) !important;
+  border-bottom: 1px solid var(--dm-border) !important;
+}
+
+/* -----------------------------
+   6) COURSE SECTIONS + ACTIVITIES (kill wrapper whites)
+   ----------------------------- */
+#page.dark-mode .course-content ul.topics li.section .content,
+#page.dark-mode .course-content ul.weeks li.section .content,
+#page.dark-mode .course-content .section .content,
+#page.dark-mode .section,
+#page.dark-mode li.section,
+#page.dark-mode .course-section,
+#page.dark-mode .course-section-header {
+  background-color: transparent !important;
+  border: none !important;
+}
+
+/* One clean “card” for activities */
+#page.dark-mode .activity,
+#page.dark-mode li.activity,
+#page.dark-mode .activity-item {
+  background-color: var(--dm-surface2) !important;
+  border: 1px solid var(--dm-border) !important;
+  border-radius: 12px;
+}
+
+#page.dark-mode .activity,
+#page.dark-mode li.activity {
+  padding: 10px 12px;
+  margin: 8px 0;
+}
+
+/* Don’t let nested wrappers create borders */
+#page.dark-mode .activity * {
+  border-color: var(--dm-border) !important;
+}
+
+/* Hidden activities (teacher view) */
+#page.dark-mode .activity-item.hiddenactivity,
+#page.dark-mode .activity.hiddenactivity,
+#page.dark-mode li.activity.hiddenactivity {
+  background-color: #141821 !important;
+  border-color: var(--dm-border) !important;
+  opacity: 0.65;
+}
+#page.dark-mode .activity-item.hiddenactivity a {
+  color: var(--dm-muted) !important;
+}
+
+/* Descriptions (labels, section/activity description text) */
+#page.dark-mode .description,
+#page.dark-mode .description-content,
+#page.dark-mode .description-inner,
+#page.dark-mode .activity .description,
+#page.dark-mode .section .description {
+  background-color: transparent !important;
+  border: none !important;
+  color: var(--dm-text) !important;
+}
+
+/* Section availability / course description item (restore border) */
+#page.dark-mode .section_availability.course-description-item {
+  background-color: transparent !important;
+  border: 1px solid var(--dm-border) !important;
+  border-radius: 8px;
+  color: var(--dm-text) !important;
+}
+#page.dark-mode .section_availability.course-description-item * {
+  background-color: transparent !important;
+}
+
+/* -----------------------------
+   7) FORMS / TABLES / ALERTS
+   ----------------------------- */
+#page.dark-mode input,
+#page.dark-mode select,
+#page.dark-mode textarea,
+#page.dark-mode .form-control {
+  background-color: var(--dm-input) !important;
+  color: var(--dm-text) !important;
+  border: 1px solid var(--dm-border) !important;
+}
+#page.dark-mode ::placeholder {
+  color: var(--dm-muted) !important;
+}
+
+#page.dark-mode table,
+#page.dark-mode .table,
+#page.dark-mode .generaltable {
+  background-color: var(--dm-surface2) !important;
+  color: var(--dm-text) !important;
+  border-color: var(--dm-border) !important;
+}
+#page.dark-mode th {
+  background-color: var(--dm-surface) !important;
+  color: var(--dm-text) !important;
+}
+#page.dark-mode td {
+  background-color: transparent !important;
+}
+
+#page.dark-mode .alert {
+  background-color: var(--dm-surface2) !important;
+  color: var(--dm-text) !important;
+  border-color: var(--dm-border) !important;
+  border-left-width: 4px !important;
+}
+
+/* Utility bg whites (plugins/content) */
+#page.dark-mode .bg-white,
+#page.dark-mode .bg-light,
+#page.dark-mode .bg-body,
+#page.dark-mode .bg-body-tertiary {
+  background-color: var(--dm-surface) !important;
+  color: var(--dm-text) !important;
+}
+
+/* Image thumbnails have explicit white background in Bootstrap */
+#page.dark-mode .img-thumbnail {
+  background-color: var(--dm-surface2) !important;
+  border-color: var(--dm-border) !important;
+}
+
+/* MathJax overlays/menus can be white */
+#page.dark-mode .MathJax_Menu,
+#page.dark-mode #MathJax_ZoomOverlay,
+#page.dark-mode #MathJax_ZoomEventTrap {
+  background-color: var(--dm-surface) !important;
+  color: var(--dm-text) !important;
+  border-color: var(--dm-border) !important;
+}
+
+/* -----------------------------
+   8) WHITE-KILLER (INLINE STYLES) — BEFORE ICON COLORS
+   This removes teacher-inserted inline white backgrounds.
+   ----------------------------- */
+#page.dark-mode #region-main *[style*="background"],
+#page.dark-mode #region-main *[style*="background-color"],
+#page.dark-mode #region-main *[style*="bgcolor"],
+#page.dark-mode .drawercontent *[style*="background"],
+#page.dark-mode .drawercontent *[style*="background-color"],
+#page.dark-mode .drawercontent *[style*="bgcolor"] {
+  background-color: transparent !important;
+  background: transparent !important;
+}
+
+/* -----------------------------
+   9) ICON BACKPLATE COLORS — MUST BE LAST
+   (This is what was “disappearing” before.)
+   Icons remain normal; only the plate is colored.
+   ----------------------------- */
+#page.dark-mode .activityiconcontainer {
+  /* keep Moodle default “tile” look */
+  border-radius: 4px !important;
+  border: none !important;
+}
+
+/* Use any Moodle vars if present; fall back to our palette */
+#page.dark-mode .activityiconcontainer.administration {
+  background-color: var(--activityadministration, #dc2626) !important;
+}
+#page.dark-mode .activityiconcontainer.assessment {
+  background-color: var(--activityassessment, #7c3aed) !important;
+}
+#page.dark-mode .activityiconcontainer.collaboration {
+  background-color: var(--activitycollaboration, #d97706) !important;
+}
+#page.dark-mode .activityiconcontainer.communication {
+  background-color: var(--activitycommunication, #059669) !important;
+}
+#page.dark-mode .activityiconcontainer.content {
+  background-color: var(--activitycontent, #2563eb) !important;
+}
+#page.dark-mode .activityiconcontainer.interface {
+  background-color: var(--activityinterface, #64748b) !important;
+}
