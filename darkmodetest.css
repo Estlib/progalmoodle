@@ -30,6 +30,13 @@
   color: inherit;
   border-color: var(--dm-border) !important;
 }
+/* STOP global color rules from affecting SVGs */
+#page.dark-mode svg,
+#page.dark-mode svg * {
+  color: unset !important;
+  fill: unset !important;
+  stroke: unset !important;
+}
 
 /* Links */
 #page.dark-mode a,
