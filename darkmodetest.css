@@ -440,3 +440,35 @@ body.dark-mode ::-webkit-scrollbar-thumb,
   background-color: var(--dm-surface2) !important;
   color: var(--dm-text) !important;
 }
+/* =====================================================
+   NORMALIZE ALL ACTIVITY VARIANTS (FINAL FIX)
+   ===================================================== */
+
+/* 1) Kill white backgrounds on ALL activity subclasses */
+#page.dark-mode [class^="activity-"],
+#page.dark-mode [class*=" activity-"],
+#page.dark-mode .activity-item,
+#page.dark-mode .activity-item * {
+  background-color: transparent !important;
+  border-color: var(--dm-border) !important;
+}
+
+/* 2) Restore ONE clean card surface on the outer activity only */
+#page.dark-mode .activity,
+#page.dark-mode li.activity,
+#page.dark-mode .activity-item {
+  background-color: var(--dm-surface2) !important;
+  border: 1px solid var(--dm-border) !important;
+  border-radius: 12px;
+}
+
+/* 3) Prevent nested wrappers from drawing borders */
+#page.dark-mode .activity * {
+  border: none !important;
+}
+
+/* 4) Keep icon plates intact */
+#page.dark-mode .activityiconcontainer {
+  background-clip: padding-box;
+  border: none !important;
+}
