@@ -30,12 +30,43 @@
   color: inherit;
   border-color: var(--dm-border) !important;
 }
-/* STOP global color rules from affecting SVGs */
-#page.dark-mode svg,
-#page.dark-mode svg * {
-  color: unset !important;
-  fill: unset !important;
-  stroke: unset !important;
+/* =========================
+   TEMP: RANDOM ICON COLORS
+   ========================= */
+
+/* Assessment (assign, quiz, workshop, etc.) */
+#page.dark-mode .activityiconcontainer.assessment {
+  background-color: #22c55e !important; /* green */
+}
+
+/* Content (page, book, file, folder) */
+#page.dark-mode .activityiconcontainer.content {
+  background-color: #3b82f6 !important; /* blue */
+}
+
+/* Communication (forum, chat) */
+#page.dark-mode .activityiconcontainer.communication {
+  background-color: #a855f7 !important; /* purple */
+}
+
+/* Interface / navigation-like */
+#page.dark-mode .activityiconcontainer.interface {
+  background-color: #f59e0b !important; /* amber */
+}
+
+/* Administration / management */
+#page.dark-mode .activityiconcontainer.administration {
+  background-color: #ef4444 !important; /* red */
+}
+
+/* Collaboration / group tools (if present) */
+#page.dark-mode .activityiconcontainer.collaboration {
+  background-color: #06b6d4 !important; /* cyan */
+}
+
+/* Fallback — anything unknown */
+#page.dark-mode .activityiconcontainer {
+  border-radius: 999px !important;      /* force circle */
 }
 
 /* Links */
