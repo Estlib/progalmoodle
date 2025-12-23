@@ -172,7 +172,7 @@ body.dark-mode .activityiconcontainer.communication,
 html.dark-mode .activityiconcontainer.content,
 body.dark-mode .activityiconcontainer.content,
 #page.dark-mode .activityiconcontainer.content {
-  background-color: var(--activitycontent, #39e27d) !important;
+  background-color: var(--activitycontent, #39ace2) !important;
 }
 html.dark-mode .activityiconcontainer.interface,
 body.dark-mode .activityiconcontainer.interface,
@@ -227,4 +227,80 @@ body.dark-mode ::-webkit-scrollbar-thumb,
 #page.dark-mode .section ul li {
   border: none !important;
   background-color: transparent !important;
+}
+/* =====================================================
+   KILL REMAINING WHITES (INLINE + COMMON MOODLE UI)
+   Append at END of file
+   ===================================================== */
+
+/* A) Override inline white backgrounds inside main content */
+#page.dark-mode #region-main [style*="background-color: rgb(255, 255, 255)"],
+#page.dark-mode #region-main [style*="background-color:#fff"],
+#page.dark-mode #region-main [style*="background-color: #fff"],
+#page.dark-mode #region-main [style*="background-color:white"],
+#page.dark-mode #region-main [style*="background-color: white"],
+#page.dark-mode #region-main [style*="background: rgb(255, 255, 255)"],
+#page.dark-mode #region-main [style*="background:#fff"],
+#page.dark-mode #region-main [style*="background: #fff"],
+#page.dark-mode #region-main [style*="background:white"],
+#page.dark-mode #region-main [style*="background: white"] {
+  background-color: transparent !important;
+  background: transparent !important;
+}
+
+/* B) Tables in content (Moodle + inline) */
+#page.dark-mode #region-main table,
+#page.dark-mode #region-main .generaltable,
+#page.dark-mode #region-main table[style*="background"],
+#page.dark-mode #region-main table td,
+#page.dark-mode #region-main table th {
+  background-color: var(--dm-surface2) !important;
+  color: var(--dm-text) !important;
+  border-color: var(--dm-border) !important;
+}
+
+/* C) Moodle “white UI” components */
+#page.dark-mode .moremenu .nav-tabs,
+#page.dark-mode .moremenu .nav-link,
+#page.dark-mode .moremenu .nav-link:hover,
+#page.dark-mode .moremenu .nav-link.active,
+#page.dark-mode .secondary-navigation .navigation,
+#page.dark-mode .secondary-navigation .navigation .nav-tabs,
+#page.dark-mode .primary-navigation,
+#page.dark-mode .tertiary-navigation,
+#page.dark-mode .dropdown-menu,
+#page.dark-mode .dropdown-item,
+#page.dark-mode .list-group,
+#page.dark-mode .list-group-item,
+#page.dark-mode .courseindex .courseindex-item,
+#page.dark-mode .courseindex .courseindex-item.active,
+#page.dark-mode .popover,
+#page.dark-mode .tooltip-inner,
+#page.dark-mode .modal-content {
+  background-color: var(--dm-surface) !important;
+  color: var(--dm-text) !important;
+  border-color: var(--dm-border) !important;
+}
+
+/* Make hover states not flash white */
+#page.dark-mode .dropdown-item:hover,
+#page.dark-mode .list-group-item:hover,
+#page.dark-mode .moremenu .nav-link:hover {
+  background-color: var(--dm-surface2) !important;
+}
+
+/* D) If some sections still have white “content” panels */
+#page.dark-mode .course-content ul.topics li.section .content,
+#page.dark-mode .course-content ul.weeks li.section .content,
+#page.dark-mode .course-content .section .content {
+  background-color: transparent !important;
+}
+
+/* E) MathJax menus/overlays (they are explicitly white in your export) */
+#page.dark-mode .MathJax_Menu,
+#page.dark-mode #MathJax_ZoomOverlay,
+#page.dark-mode #MathJax_ZoomEventTrap {
+  background-color: var(--dm-surface) !important;
+  color: var(--dm-text) !important;
+  border-color: var(--dm-border) !important;
 }
