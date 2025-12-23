@@ -1,39 +1,56 @@
-/* =========================
-   EASY DARK MODE OVERRIDES (UPDATED)
-   Targets: #page + main + drawer + common UI
-   + ACTIVITY ICON COLORING via modtype_*
-   ========================= */
+/* =========================================================
+   MOODLE DARK MODE – FULL FILE (GLOBAL-SAFE VERSION)
+   Works even with:
+   #page.dark-mode * { background-color: ... !important; }
+   ========================================================= */
 
-/* 0) Theme tokens (edit these only) */
+
+/* =========================================================
+   0) THEME TOKENS
+   ========================================================= */
 #page.dark-mode {
-  --dm-bg: #0f1115;
+  --dm-bg: #1e1e1e;
   --dm-surface: #151922;
   --dm-surface2: #1b2230;
-  --dm-border: #2a3446;
-  --dm-text: #e6e8ee;
+  --dm-border: #333;
+  --dm-text: #eeeeee;
   --dm-muted: #a7b0c0;
 
   --dm-link: #7dd3fc;
-  --dm-accent: #22c55e;     /* left accent for activities etc */
-  --dm-primary: #2563eb;    /* primary buttons */
+  --dm-primary: #2563eb;
   --dm-danger: #ef4444;
   --dm-warn: #f59e0b;
 }
 
-/* 1) GLOBAL BASELINE (svg-safe) */
+
+/* =========================================================
+   1) GLOBAL DARK MODE (YES, THIS IS THE NUKER – KEEP IT)
+   ========================================================= */
+.main-inner.dark-mode,
+.main-inner.dark-mode *,
 #page.dark-mode,
-#page.dark-mode body {
-  background: var(--dm-bg) !important;
+#page.dark-mode * {
+  background-color: var(--dm-bg) !important;
   color: var(--dm-text) !important;
-}
-
-/* Avoid global color forcing on SVGs */
-#page.dark-mode :not(svg):not(svg *) {
-  color: inherit;
   border-color: var(--dm-border) !important;
+  transition: background 0.3s, color 0.3s, border-color 0.3s;
 }
 
-/* Links */
+
+/* =========================================================
+   2) SVG SAFETY – DO NOT RECOLOR ICON PATHS
+   ========================================================= */
+#page.dark-mode svg,
+#page.dark-mode svg * {
+  color: unset !important;
+  fill: unset !important;
+  stroke: unset !important;
+}
+
+
+/* =========================================================
+   3) LINKS
+   ========================================================= */
 #page.dark-mode a,
 #page.dark-mode a:visited {
   color: var(--dm-link) !important;
@@ -42,19 +59,14 @@
   filter: brightness(1.15);
 }
 
-/* 2) MAIN WRAPPERS */
-#page.dark-mode #page,
-#page.dark-mode .main-inner,
-#page.dark-mode #region-main,
-#page.dark-mode .course-content {
-  background: var(--dm-bg) !important;
-}
 
-/* 3) NAVBAR / HEADER */
+/* =========================================================
+   4) NAVBAR / HEADER
+   ========================================================= */
 #page.dark-mode .navbar,
 #page.dark-mode .page-header,
 #page.dark-mode .breadcrumb {
-  background: var(--dm-surface) !important;
+  background-color: var(--dm-surface) !important;
   border-bottom: 1px solid var(--dm-border) !important;
 }
 #page.dark-mode .breadcrumb-item,
@@ -62,181 +74,165 @@
   color: var(--dm-muted) !important;
 }
 
-/* 4) DRAWER (right/left side panels) */
+
+/* =========================================================
+   5) DRAWERS
+   ========================================================= */
 #page.dark-mode .drawer,
 #page.dark-mode .drawerheader,
 #page.dark-mode .drawercontent {
-  background: var(--dm-surface) !important;
-  color: var(--dm-text) !important;
-}
-#page.dark-mode .drawercontent * {
-  background: transparent !important;
+  background-color: var(--dm-surface) !important;
 }
 #page.dark-mode .drawerheader {
   border-bottom: 1px solid var(--dm-border) !important;
 }
 #page.dark-mode .drawerheader .drawertoggle {
-  background: var(--dm-surface2) !important;
+  background-color: var(--dm-surface2) !important;
   border: 1px solid var(--dm-border) !important;
-  color: var(--dm-text) !important;
 }
 
-/* 5) BLOCKS (widgets) */
+
+/* =========================================================
+   6) BLOCKS / CARDS
+   ========================================================= */
 #page.dark-mode .block,
-#page.dark-mode .block .card,
-#page.dark-mode .block .card-body {
-  background: var(--dm-surface2) !important;
+#page.dark-mode .card,
+#page.dark-mode .card-body {
+  background-color: var(--dm-surface2) !important;
   border: 1px solid var(--dm-border) !important;
   border-radius: 12px;
 }
 #page.dark-mode .block-header,
-#page.dark-mode .block .card-header {
-  background: var(--dm-surface) !important;
+#page.dark-mode .card-header {
+  background-color: var(--dm-surface) !important;
   border-bottom: 1px solid var(--dm-border) !important;
 }
 
-/* 6) COURSE SECTIONS + ACTIVITIES */
-#page.dark-mode .section,
-#page.dark-mode .course-section-header {
-  background: transparent !important;
-}
+
+/* =========================================================
+   7) ACTIVITIES
+   ========================================================= */
 #page.dark-mode .activity,
 #page.dark-mode li.activity {
-  background: var(--dm-surface2) !important;
+  background-color: var(--dm-surface2) !important;
   border: 1px solid var(--dm-border) !important;
-  border-left: 4px solid var(--dm-accent) !important;
   border-radius: 12px;
   padding: 10px 12px;
   margin: 8px 0;
 }
-#page.dark-mode .sectionname,
-#page.dark-mode .course-section-header .sectionname {
-  color: var(--dm-text) !important;
-}
-#page.dark-mode .activity .instancename,
-#page.dark-mode .activity a {
-  color: var(--dm-text) !important;
-}
 
-/* 7) BUTTONS */
+
+/* =========================================================
+   8) BUTTONS
+   ========================================================= */
 #page.dark-mode .btn {
-  background: var(--dm-surface2) !important;
-  color: var(--dm-text) !important;
+  background-color: var(--dm-surface2) !important;
   border: 1px solid var(--dm-border) !important;
+  color: var(--dm-text) !important;
 }
 #page.dark-mode .btn-primary {
-  background: var(--dm-primary) !important;
+  background-color: var(--dm-primary) !important;
   border-color: #1d4ed8 !important;
   color: #fff !important;
 }
 #page.dark-mode .btn-danger {
-  background: var(--dm-danger) !important;
+  background-color: var(--dm-danger) !important;
   border-color: #b91c1c !important;
   color: #fff !important;
 }
 
-/* 8) FORMS / INPUTS */
+
+/* =========================================================
+   9) FORMS
+   ========================================================= */
 #page.dark-mode input,
 #page.dark-mode select,
 #page.dark-mode textarea,
 #page.dark-mode .form-control {
-  background: #0b0f18 !important;
-  color: var(--dm-text) !important;
+  background-color: #0b0f18 !important;
   border: 1px solid var(--dm-border) !important;
+  color: var(--dm-text) !important;
 }
 #page.dark-mode ::placeholder {
   color: var(--dm-muted) !important;
 }
 
-/* 9) TABLES */
+
+/* =========================================================
+   10) TABLES
+   ========================================================= */
 #page.dark-mode table,
 #page.dark-mode .table {
-  background: var(--dm-surface2) !important;
-  color: var(--dm-text) !important;
+  background-color: var(--dm-surface2) !important;
 }
 #page.dark-mode th {
-  background: var(--dm-surface) !important;
-  color: var(--dm-text) !important;
+  background-color: var(--dm-surface) !important;
 }
 #page.dark-mode td {
-  background: transparent !important;
+  background-color: transparent !important;
 }
 
-/* 10) ALERTS / NOTICES */
+
+/* =========================================================
+   11) ALERTS
+   ========================================================= */
 #page.dark-mode .alert {
-  background: var(--dm-surface2) !important;
+  background-color: var(--dm-surface2) !important;
   border: 1px solid var(--dm-border) !important;
-  color: var(--dm-text) !important;
   border-left-width: 4px !important;
 }
-#page.dark-mode .alert-success { border-left-color: var(--dm-accent) !important; }
+#page.dark-mode .alert-success { border-left-color: #22c55e !important; }
 #page.dark-mode .alert-warning { border-left-color: var(--dm-warn) !important; }
 #page.dark-mode .alert-danger  { border-left-color: var(--dm-danger) !important; }
 
-/* 11) SCROLLBARS (Chrome/Edge) */
-#page.dark-mode ::-webkit-scrollbar { width: 10px; height: 10px; }
-#page.dark-mode ::-webkit-scrollbar-track { background: var(--dm-bg); }
-#page.dark-mode ::-webkit-scrollbar-thumb { background: #3b465a; border-radius: 6px; }
-#page.dark-mode ::-webkit-scrollbar-thumb:hover { background: #4b5a74; }
+
+/* =========================================================
+   12) SCROLLBARS
+   ========================================================= */
+#page.dark-mode ::-webkit-scrollbar {
+  width: 10px;
+}
+#page.dark-mode ::-webkit-scrollbar-track {
+  background-color: var(--dm-bg);
+}
+#page.dark-mode ::-webkit-scrollbar-thumb {
+  background-color: #3b465a;
+  border-radius: 6px;
+}
 
 
-/* =========================
-   ACTIVITY ICON COLORS (RELIABLE)
-   Uses Moodle's modtype_* classes
-   ========================= */
+/* =========================================================
+   13) 🔥 FINAL HARD OVERRIDE – ACTIVITY ICON COLORS 🔥
+   THIS IS THE FIX. DO NOT MOVE ABOVE.
+   ========================================================= */
 
-/* Ensure the icon backplate is round (wherever it is) */
+/* Cancel global background nuke on icons */
 #page.dark-mode .activityiconcontainer,
-#page.dark-mode .activity .activityiconcontainer,
-#page.dark-mode .activity-item .activityiconcontainer {
-  border-radius: 999px !important;
+#page.dark-mode .activityiconcontainer * {
+  background-color: unset !important;
 }
 
-/* Some themes put the backplate on a child wrapper */
-#page.dark-mode .activityiconcontainer > span,
-#page.dark-mode .activityiconcontainer > div {
-  border-radius: 999px !important;
+/* Reapply Moodle activity colors */
+#page.dark-mode .activityiconcontainer.administration {
+  background-color: var(--activityadministration, #5d63f6) !important;
+}
+#page.dark-mode .activityiconcontainer.assessment {
+  background-color: var(--activityassessment, #eb66a2) !important;
+}
+#page.dark-mode .activityiconcontainer.collaboration {
+  background-color: var(--activitycollaboration, #f7634d) !important;
+}
+#page.dark-mode .activityiconcontainer.communication {
+  background-color: var(--activitycommunication, #11a676) !important;
+}
+#page.dark-mode .activityiconcontainer.content {
+  background-color: var(--activitycontent, #399be2) !important;
+}
+#page.dark-mode .activityiconcontainer.interface {
+  background-color: var(--activityinterface, #a378ff) !important;
 }
 
-/* Per-module colors (random/high-contrast for testing) */
-#page.dark-mode .modtype_assign    .activityiconcontainer { background: #22c55e !important; } /* green */
-#page.dark-mode .modtype_quiz      .activityiconcontainer { background: #f59e0b !important; } /* amber */
-#page.dark-mode .modtype_forum     .activityiconcontainer { background: #a855f7 !important; } /* purple */
-#page.dark-mode .modtype_page      .activityiconcontainer { background: #3b82f6 !important; } /* blue */
-#page.dark-mode .modtype_url       .activityiconcontainer { background: #ef4444 !important; } /* red */
-#page.dark-mode .modtype_book      .activityiconcontainer { background: #06b6d4 !important; } /* cyan */
-#page.dark-mode .modtype_resource  .activityiconcontainer { background: #f97316 !important; } /* orange */
-#page.dark-mode .modtype_folder    .activityiconcontainer { background: #84cc16 !important; } /* lime */
-#page.dark-mode .modtype_choice    .activityiconcontainer { background: #14b8a6 !important; } /* teal */
-#page.dark-mode .modtype_chat      .activityiconcontainer { background: #e11d48 !important; } /* rose */
-#page.dark-mode .modtype_workshop  .activityiconcontainer { background: #8b5cf6 !important; } /* violet */
-
-/* Fallback: if your theme DOESN'T use .activityiconcontainer as the backplate,
-   force a visible backplate on the image itself. */
-#page.dark-mode .modtype_assign    img.activityicon,
-#page.dark-mode .modtype_quiz      img.activityicon,
-#page.dark-mode .modtype_forum     img.activityicon,
-#page.dark-mode .modtype_page      img.activityicon,
-#page.dark-mode .modtype_url       img.activityicon,
-#page.dark-mode .modtype_book      img.activityicon,
-#page.dark-mode .modtype_resource  img.activityicon,
-#page.dark-mode .modtype_folder    img.activityicon,
-#page.dark-mode .modtype_choice    img.activityicon,
-#page.dark-mode .modtype_chat      img.activityicon,
-#page.dark-mode .modtype_workshop  img.activityicon {
+/* Make them circular and visible */
+#page.dark-mode .activityiconcontainer {
   border-radius: 999px !important;
-  padding: 6px !important;
 }
-
-/* If the image fallback is used, give it background colors too */
-#page.dark-mode .modtype_assign    img.activityicon { background: #22c55e !important; }
-#page.dark-mode .modtype_quiz      img.activityicon { background: #f59e0b !important; }
-#page.dark-mode .modtype_forum     img.activityicon { background: #a855f7 !important; }
-#page.dark-mode .modtype_page      img.activityicon { background: #3b82f6 !important; }
-#page.dark-mode .modtype_url       img.activityicon { background: #ef4444 !important; }
-#page.dark-mode .modtype_book      img.activityicon { background: #06b6d4 !important; }
-#page.dark-mode .modtype_resource  img.activityicon { background: #f97316 !important; }
-#page.dark-mode .modtype_folder    img.activityicon { background: #84cc16 !important; }
-#page.dark-mode .modtype_choice    img.activityicon { background: #14b8a6 !important; }
-#page.dark-mode .modtype_chat      img.activityicon { background: #e11d48 !important; }
-#page.dark-mode .modtype_workshop  img.activityicon { background: #8b5cf6 !important; }
