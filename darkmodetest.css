@@ -1,11 +1,10 @@
 /* =========================================================
-   MOODLE DARK MODE — RECOMPILED (FRAME + CONTENT FIX)
+   MOODLE DARK MODE — RECOMPILED (SCOPED NUKE)
+   Fixes: "only frame is dark" by forcing dark backgrounds
+   INSIDE content regions, while excluding activity icon plates.
    ========================================================= */
 
-
-/* =========================================================
-   0) THEME TOKENS
-   ========================================================= */
+/* ---------- Tokens ---------- */
 #page.dark-mode {
   --dm-bg: #1e1e1e;
   --dm-surface: #151922;
@@ -20,43 +19,21 @@
   --dm-warn: #f59e0b;
 }
 
-
-/* =========================================================
-   1) DARK MODE — FRAME + MAIN CONTENT (CRITICAL FIX)
-   ========================================================= */
+/* ---------- Frame surfaces ---------- */
 #page.dark-mode,
 #page.dark-mode body,
-#page.dark-mode #page,
-#page.dark-mode #region-main,
-#page.dark-mode .main-inner,
-#page.dark-mode .course-content,
-#page.dark-mode .page-content,
-#page.dark-mode #page-content {
+#page.dark-mode #page {
   background-color: var(--dm-bg) !important;
   color: var(--dm-text) !important;
 }
 
-
-/* =========================================================
-   2) DRAWERS / SIDE PANELS
-   ========================================================= */
-#page.dark-mode .drawer,
-#page.dark-mode .drawerheader,
-#page.dark-mode .drawercontent {
-  background-color: var(--dm-surface) !important;
-  color: var(--dm-text) !important;
-}
-
-
-/* =========================================================
-   3) SAFE GLOBALS (NO BACKGROUND PAINTING)
-   ========================================================= */
+/* ---------- SAFE global defaults (NO global background painting) ---------- */
 #page.dark-mode * {
   color: inherit;
   border-color: var(--dm-border) !important;
 }
 
-/* SVG SAFETY */
+/* ---------- SVG safety ---------- */
 #page.dark-mode svg,
 #page.dark-mode svg * {
   fill: unset !important;
@@ -64,9 +41,45 @@
   color: unset !important;
 }
 
+/* =========================================================
+   SCOPED BACKGROUND NUKE (THE IMPORTANT PART)
+   Darken EVERYTHING inside main content + drawers,
+   but DO NOT touch activity icon containers (we want colors).
+   ========================================================= */
+
+/* Main content region(s) */
+#page.dark-mode .main-inner,
+#page.dark-mode #region-main,
+#page.dark-mode .course-content,
+#page.dark-mode .page-content,
+#page.dark-mode #page-content {
+  background-color: var(--dm-bg) !important;
+  color: var(--dm-text) !important;
+}
+
+/* Nuke light backgrounds inside region-main, EXCEPT activityiconcontainer */
+#page.dark-mode #region-main :not(.activityiconcontainer):not(.activityiconcontainer *),
+#page.dark-mode .main-inner  :not(.activityiconcontainer):not(.activityiconcontainer *),
+#page.dark-mode .course-content :not(.activityiconcontainer):not(.activityiconcontainer *) {
+  background-color: var(--dm-bg) !important;
+  color: var(--dm-text) !important;
+}
+
+/* Drawer surfaces + scoped nuke inside drawercontent */
+#page.dark-mode .drawer,
+#page.dark-mode .drawerheader,
+#page.dark-mode .drawercontent {
+  background-color: var(--dm-surface) !important;
+  color: var(--dm-text) !important;
+}
+
+#page.dark-mode .drawercontent :not(.activityiconcontainer):not(.activityiconcontainer *) {
+  background-color: var(--dm-surface) !important;
+  color: var(--dm-text) !important;
+}
 
 /* =========================================================
-   4) LINKS
+   LINKS
    ========================================================= */
 #page.dark-mode a,
 #page.dark-mode a:visited {
@@ -76,9 +89,8 @@
   filter: brightness(1.15);
 }
 
-
 /* =========================================================
-   5) NAVBAR / HEADER
+   NAV / HEADER
    ========================================================= */
 #page.dark-mode .navbar,
 #page.dark-mode .page-header,
@@ -91,9 +103,8 @@
   color: var(--dm-muted) !important;
 }
 
-
 /* =========================================================
-   6) BLOCKS / CARDS
+   CARDS / BLOCKS (restore “surface” look after scoped nuke)
    ========================================================= */
 #page.dark-mode .block,
 #page.dark-mode .card,
@@ -108,20 +119,24 @@
   border-bottom: 1px solid var(--dm-border) !important;
 }
 
-
 /* =========================================================
-   7) COURSE SECTIONS & ACTIVITIES
+   ACTIVITIES / SECTIONS (restore “cards” after scoped nuke)
    ========================================================= */
 #page.dark-mode .section,
 #page.dark-mode .course-section-header {
-  background: transparent !important;
+  background-color: transparent !important;
+}
+
+#page.dark-mode .activity,
+#page.dark-mode li.activity,
+#page.dark-mode .activity-item {
+  background-color: var(--dm-surface2) !important;
+  border: 1px solid var(--dm-border) !important;
+  border-radius: 12px;
 }
 
 #page.dark-mode .activity,
 #page.dark-mode li.activity {
-  background-color: var(--dm-surface2) !important;
-  border: 1px solid var(--dm-border) !important;
-  border-radius: 12px;
   padding: 10px 12px;
   margin: 8px 0;
 }
@@ -132,37 +147,28 @@
   color: var(--dm-text) !important;
 }
 
-
 /* =========================================================
-   8) ACTIVITY ICON COLORS (CONFIRMED WORKING STRUCTURE)
+   ✅ ACTIVITY ICON PLATES (MUST BE AFTER SCOPED NUKE)
    ========================================================= */
 #page.dark-mode .activityiconcontainer {
   border-radius: 999px !important;
 }
 
-/* Moodle-provided activity palette */
-#page.dark-mode .activityiconcontainer.administration {
-  background-color: var(--activityadministration) !important;
-}
-#page.dark-mode .activityiconcontainer.assessment {
-  background-color: var(--activityassessment) !important;
-}
-#page.dark-mode .activityiconcontainer.collaboration {
-  background-color: var(--activitycollaboration) !important;
-}
-#page.dark-mode .activityiconcontainer.communication {
-  background-color: var(--activitycommunication) !important;
-}
-#page.dark-mode .activityiconcontainer.content {
-  background-color: var(--activitycontent) !important;
-}
-#page.dark-mode .activityiconcontainer.interface {
-  background-color: var(--activityinterface) !important;
-}
+/* Use Moodle vars if present (you confirmed these exist in computed styles) */
+#page.dark-mode .activityiconcontainer.administration { background-color: var(--activityadministration, #5d63f6) !important; }
+#page.dark-mode .activityiconcontainer.assessment     { background-color: var(--activityassessment,     #eb66a2) !important; }
+#page.dark-mode .activityiconcontainer.collaboration  { background-color: var(--activitycollaboration,  #f7634d) !important; }
+#page.dark-mode .activityiconcontainer.communication  { background-color: var(--activitycommunication,  #11a676) !important; }
+#page.dark-mode .activityiconcontainer.content        { background-color: var(--activitycontent,        #399be2) !important; }
+#page.dark-mode .activityiconcontainer.interface      { background-color: var(--activityinterface,      #a378ff) !important; }
 
+/* Optional: subtle ring so colors pop on dark */
+#page.dark-mode .activityiconcontainer {
+  box-shadow: 0 0 0 2px rgba(255,255,255,0.06) inset !important;
+}
 
 /* =========================================================
-   9) BUTTONS
+   BUTTONS
    ========================================================= */
 #page.dark-mode .btn {
   background-color: var(--dm-surface2) !important;
@@ -180,9 +186,8 @@
   color: #fff !important;
 }
 
-
 /* =========================================================
-   10) FORMS
+   FORMS
    ========================================================= */
 #page.dark-mode input,
 #page.dark-mode select,
@@ -196,9 +201,8 @@
   color: var(--dm-muted) !important;
 }
 
-
 /* =========================================================
-   11) TABLES
+   TABLES
    ========================================================= */
 #page.dark-mode table,
 #page.dark-mode .table {
@@ -212,39 +216,22 @@
   background-color: transparent !important;
 }
 
-
 /* =========================================================
-   12) ALERTS
+   ALERTS
    ========================================================= */
 #page.dark-mode .alert {
   background-color: var(--dm-surface2) !important;
   border: 1px solid var(--dm-border) !important;
   border-left-width: 4px !important;
 }
-#page.dark-mode .alert-success {
-  border-left-color: #22c55e !important;
-}
-#page.dark-mode .alert-warning {
-  border-left-color: var(--dm-warn) !important;
-}
-#page.dark-mode .alert-danger {
-  border-left-color: var(--dm-danger) !important;
-}
-
+#page.dark-mode .alert-success { border-left-color: #22c55e !important; }
+#page.dark-mode .alert-warning { border-left-color: var(--dm-warn) !important; }
+#page.dark-mode .alert-danger  { border-left-color: var(--dm-danger) !important; }
 
 /* =========================================================
-   13) SCROLLBARS
+   SCROLLBARS (Chrome/Edge)
    ========================================================= */
-#page.dark-mode ::-webkit-scrollbar {
-  width: 10px;
-}
-#page.dark-mode ::-webkit-scrollbar-track {
-  background-color: var(--dm-bg);
-}
-#page.dark-mode ::-webkit-scrollbar-thumb {
-  background-color: #3b465a;
-  border-radius: 6px;
-}
-#page.dark-mode ::-webkit-scrollbar-thumb:hover {
-  background-color: #4b5a74;
-}
+#page.dark-mode ::-webkit-scrollbar { width: 10px; height: 10px; }
+#page.dark-mode ::-webkit-scrollbar-track { background-color: var(--dm-bg); }
+#page.dark-mode ::-webkit-scrollbar-thumb { background-color: #3b465a; border-radius: 6px; }
+#page.dark-mode ::-webkit-scrollbar-thumb:hover { background-color: #4b5a74; }
