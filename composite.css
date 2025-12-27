@@ -17,6 +17,7 @@
   --dm-link: #66ccff;
   --dm-button: #2b2b2b;
   --dm-radius: 0;
+  --activitycontent: #a81818;
 }
 /* ---- activate when ANY of these has .dark-mode ---- */
 html.dark-mode,
