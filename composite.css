@@ -12,7 +12,7 @@
   --dm-surface: #151922;
   --dm-surface2: #1b2230;
   --dm-border: #333;
-  --dm-text: #EEEEEE !important;
+  --dm-text: #EEEEEE;
   --dm-muted: #a7b0c0;
   --dm-link: #66ccff;
   --dm-button: #2b2b2b;
@@ -238,6 +238,20 @@ body.dark-mode .block,
   /* border: 1px solid var(--dm-border) !important;
   border-radius: 12px; */
 }
+/* ---- prevent nested card borders inside blocks (common Moodle pattern) ---- */
+html.dark-mode .block .card,
+body.dark-mode .block .card,
+#page.dark-mode .block .card,
+html.dark-mode .block .card-header,
+body.dark-mode .block .card-header,
+#page.dark-mode .block .card-header,
+html.dark-mode .block .card-body,
+body.dark-mode .block .card-body,
+#page.dark-mode .block .card-body {
+  border: none !important;
+  box-shadow: none !important;
+  background-color: transparent !important;
+}
 /* =====================================================
    6) Course sections + activities (html/body/#page support)
    ===================================================== */
@@ -330,6 +344,21 @@ body.dark-mode .section .description,
   background-color: transparent !important;
   color: var(--dm-text) !important;
   border: none !important;
+}
+
+/* ---- prevent inner activity wrappers from drawing a 2nd border/shadow ---- */
+html.dark-mode .activity *:not(.activityiconcontainer):not(img.activityicon),
+body.dark-mode .activity *:not(.activityiconcontainer):not(img.activityicon),
+#page.dark-mode .activity *:not(.activityiconcontainer):not(img.activityicon),
+html.dark-mode li.activity *:not(.activityiconcontainer):not(img.activityicon),
+body.dark-mode li.activity *:not(.activityiconcontainer):not(img.activityicon),
+#page.dark-mode li.activity *:not(.activityiconcontainer):not(img.activityicon),
+html.dark-mode .activity-item *:not(.activityiconcontainer):not(img.activityicon),
+body.dark-mode .activity-item *:not(.activityiconcontainer):not(img.activityicon),
+#page.dark-mode .activity-item *:not(.activityiconcontainer):not(img.activityicon) {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
 }
 /* =====================================================
    FIX REMAINING WHITE DESCRIPTIONS (SAFE)
