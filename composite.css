@@ -48,7 +48,7 @@ body.dark-mode *,
 #page.dark-mode *,
 .main-inner.dark-mode * {
   color: inherit;
-  border-color: var(--dm-border) !important;
+  /*border-color: var(--dm-border) !important;*/
   transition: background 0.3s, color 0.3s, border-color 0.3s;
 }
 /* ---- DO NOT recolor SVG internals ---- */
