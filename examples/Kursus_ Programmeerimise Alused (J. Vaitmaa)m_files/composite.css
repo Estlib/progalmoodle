@@ -48,8 +48,8 @@ body.dark-mode *,
 #page.dark-mode *,
 .main-inner.dark-mode * {
   color: inherit;
-  border-color: var(--dm-border) !important;
-  transition: background 0.3s, color 0.3s, border-color 0.3s;
+  /*border-color: var(--dm-border) !important;*/
+  transition: background 0.3s, color 0.3s;
 }
 /* ---- DO NOT recolor SVG internals ---- */
 html.dark-mode svg,
@@ -330,6 +330,21 @@ body.dark-mode .section .description,
   background-color: transparent !important;
   color: var(--dm-text) !important;
   border: none !important;
+}
+/* =====================================================
+   FIX REMAINING WHITE DESCRIPTIONS (SAFE)
+   ===================================================== */
+
+html.dark-mode .description *,
+body.dark-mode .description *,
+#page.dark-mode .description *,
+html.dark-mode .description-content *,
+body.dark-mode .description-content *,
+#page.dark-mode .description-content *,
+html.dark-mode .description-inner *,
+body.dark-mode .description-inner *,
+#page.dark-mode .description-inner * {
+  background-color: transparent !important;
 }
 
 /* section availability row (restore border) */

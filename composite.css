@@ -359,6 +359,7 @@ body.dark-mode .activity-item *:not(.activityiconcontainer):not(img.activityicon
   border: none !important;
   outline: none !important;
   box-shadow: none !important;
+  background-color: transparent !important; /* <-- add this */
 }
 /* =====================================================
    FIX REMAINING WHITE DESCRIPTIONS (SAFE)
