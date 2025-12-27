@@ -444,6 +444,8 @@ body.dark-mode .activityiconcontainer,
 #page.dark-mode .activityiconcontainer {
   /* border-radius: 4px !important;
   padding: .7rem !important; */
+  
+  border-radius: var(--dm-radius) !important;
 }
 
 
