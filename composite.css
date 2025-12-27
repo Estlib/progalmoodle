@@ -476,3 +476,24 @@ body.dark-mode .activityiconcontainer.interface,
 #page.dark-mode .activityiconcontainer.interface {
   background-color: var(--activityinterface, #a378ff) !important;
 }
+
+/* ---- remove rounding globally (safe set) ---- */
+html.dark-mode .card,
+html.dark-mode .block,
+html.dark-mode .activity,
+html.dark-mode li.activity,
+html.dark-mode .activity-item,
+html.dark-mode .btn,
+html.dark-mode button,
+html.dark-mode .dropdown-menu,
+html.dark-mode .popover,
+html.dark-mode .modal-content,
+html.dark-mode .list-group,
+html.dark-mode .list-group-item,
+html.dark-mode .drawer,
+html.dark-mode .navbar,
+html.dark-mode .breadcrumb,
+html.dark-mode .courseindex .courseindex-item,
+html.dark-mode .section_availability.course-description-item {
+  border-radius: var(--dm-radius) !important;
+}
