@@ -12,10 +12,11 @@
   --dm-surface: #151922;
   --dm-surface2: #1b2230;
   --dm-border: #333;
-  --dm-text: #EEEEEE !important;
+  --dm-text: #EEEEEE;
   --dm-muted: #a7b0c0;
   --dm-link: #66ccff;
   --dm-button: #2b2b2b;
+  --dm-radius: 0;
 }
 /* ---- activate when ANY of these has .dark-mode ---- */
 html.dark-mode,
@@ -238,6 +239,20 @@ body.dark-mode .block,
   /* border: 1px solid var(--dm-border) !important;
   border-radius: 12px; */
 }
+/* ---- prevent nested card borders inside blocks (common Moodle pattern) ---- */
+html.dark-mode .block .card,
+body.dark-mode .block .card,
+#page.dark-mode .block .card,
+html.dark-mode .block .card-header,
+body.dark-mode .block .card-header,
+#page.dark-mode .block .card-header,
+html.dark-mode .block .card-body,
+body.dark-mode .block .card-body,
+#page.dark-mode .block .card-body {
+  border: none !important;
+  box-shadow: none !important;
+  background-color: transparent !important;
+}
 /* =====================================================
    6) Course sections + activities (html/body/#page support)
    ===================================================== */
@@ -331,6 +346,23 @@ body.dark-mode .section .description,
   color: var(--dm-text) !important;
   border: none !important;
 }
+
+/* ---- prevent inner activity wrappers from drawing a 2nd border/shadow ---- */
+html.dark-mode .activity *:not(.activityiconcontainer):not(img.activityicon),
+body.dark-mode .activity *:not(.activityiconcontainer):not(img.activityicon),
+#page.dark-mode .activity *:not(.activityiconcontainer):not(img.activityicon),
+html.dark-mode li.activity *:not(.activityiconcontainer):not(img.activityicon),
+body.dark-mode li.activity *:not(.activityiconcontainer):not(img.activityicon),
+#page.dark-mode li.activity *:not(.activityiconcontainer):not(img.activityicon),
+html.dark-mode .activity-item *:not(.activityiconcontainer):not(img.activityicon),
+body.dark-mode .activity-item *:not(.activityiconcontainer):not(img.activityicon),
+#page.dark-mode .activity-item *:not(.activityiconcontainer):not(img.activityicon) {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background-color: transparent !important; /* <-- add this */  
+  border-radius: var(--dm-radius) !important;
+}
 /* =====================================================
    FIX REMAINING WHITE DESCRIPTIONS (SAFE)
    ===================================================== */
@@ -412,6 +444,31 @@ body.dark-mode .activityiconcontainer,
 #page.dark-mode .activityiconcontainer {
   /* border-radius: 4px !important;
   padding: .7rem !important; */
+  
+  border-radius: var(--dm-radius) !important;
+}
+/* =====================================================
+   FIX missing icon plate colors for resources (URL/PAGE/FILE)
+   Some themes use modtype_* instead of .content
+   ===================================================== */
+
+html.dark-mode .activityiconcontainer.modtype_url,
+body.dark-mode .activityiconcontainer.modtype_url,
+#page.dark-mode .activityiconcontainer.modtype_url,
+
+html.dark-mode .activityiconcontainer.modtype_page,
+body.dark-mode .activityiconcontainer.modtype_page,
+#page.dark-mode .activityiconcontainer.modtype_page,
+
+/* FILE is often "resource" in Moodle (and sometimes "file") */
+html.dark-mode .activityiconcontainer.modtype_resource,
+body.dark-mode .activityiconcontainer.modtype_resource,
+#page.dark-mode .activityiconcontainer.modtype_resource,
+
+html.dark-mode .activityiconcontainer.modtype_file,
+body.dark-mode .activityiconcontainer.modtype_file,
+#page.dark-mode .activityiconcontainer.modtype_file {
+  background-color: var(--activitycontent, #39ace2) !important;
 }
 
 
@@ -425,6 +482,8 @@ html.dark-mode .activityiconcontainer.assessment,
 body.dark-mode .activityiconcontainer.assessment,
 #page.dark-mode .activityiconcontainer.assessment {
   background-color: var(--activityassessment, #eb66a2) !important;
+  
+  border-radius: var(--dm-radius) !important;
 }
 html.dark-mode .activityiconcontainer.collaboration,
 body.dark-mode .activityiconcontainer.collaboration,
@@ -445,4 +504,25 @@ html.dark-mode .activityiconcontainer.interface,
 body.dark-mode .activityiconcontainer.interface,
 #page.dark-mode .activityiconcontainer.interface {
   background-color: var(--activityinterface, #a378ff) !important;
+}
+
+/* ---- remove rounding globally (safe set) ---- */
+html.dark-mode .card,
+html.dark-mode .block,
+html.dark-mode .activity,
+html.dark-mode li.activity,
+html.dark-mode .activity-item,
+html.dark-mode .btn,
+html.dark-mode button,
+html.dark-mode .dropdown-menu,
+html.dark-mode .popover,
+html.dark-mode .modal-content,
+html.dark-mode .list-group,
+html.dark-mode .list-group-item,
+html.dark-mode .drawer,
+html.dark-mode .navbar,
+html.dark-mode .breadcrumb,
+html.dark-mode .courseindex .courseindex-item,
+html.dark-mode .section_availability.course-description-item {
+  border-radius: var(--dm-radius) !important;
 }
