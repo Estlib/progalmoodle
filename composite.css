@@ -459,6 +459,8 @@ html.dark-mode .activityiconcontainer.assessment,
 body.dark-mode .activityiconcontainer.assessment,
 #page.dark-mode .activityiconcontainer.assessment {
   background-color: var(--activityassessment, #eb66a2) !important;
+  
+  border-radius: var(--dm-radius) !important;
 }
 html.dark-mode .activityiconcontainer.collaboration,
 body.dark-mode .activityiconcontainer.collaboration,
