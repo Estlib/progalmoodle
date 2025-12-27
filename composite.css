@@ -495,5 +495,5 @@ html.dark-mode .navbar,
 html.dark-mode .breadcrumb,
 html.dark-mode .courseindex .courseindex-item,
 html.dark-mode .section_availability.course-description-item {
-  border-radius: var(--dm-radius) !important;
+  border-radius: 0 !important;
 }
