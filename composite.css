@@ -553,3 +553,10 @@ body.dark-mode li.modtype_file .activityiconcontainer,
 #page.dark-mode li.modtype_file .activityiconcontainer {
   background-color: var(--activitycontent, #39ace2) !important;
 }
+/* FORCE URL/Page/File icon plate background (wins specificity wars) */
+html.dark-mode #page .activityiconcontainer.content.courseicon,
+body.dark-mode #page .activityiconcontainer.content.courseicon,
+#page.dark-mode .activityiconcontainer.content.courseicon {
+  background-color: var(--activitycontent, #39ace2) !important;
+  background: var(--activitycontent, #39ace2) !important;
+}
