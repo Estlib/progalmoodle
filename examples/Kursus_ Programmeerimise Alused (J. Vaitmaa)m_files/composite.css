@@ -420,9 +420,9 @@ body.dark-mode #region-main > *,
 }
 
 /* Common Moodle white offenders */
-html.dark-mode #region-main .content,
-body.dark-mode #region-main .content,
-#page.dark-mode #region-main .content,
+html.dark-mode #region-main .content:not(.activityiconcontainer),
+body.dark-mode #region-main .content:not(.activityiconcontainer),
+#page.dark-mode #region-main .content:not(.activityiconcontainer),
 html.dark-mode #region-main .card-body,
 body.dark-mode #region-main .card-body,
 #page.dark-mode #region-main .card-body,
@@ -447,29 +447,7 @@ body.dark-mode .activityiconcontainer,
   
   border-radius: var(--dm-radius) !important;
 }
-/* =====================================================
-   FIX missing icon plate colors for resources (URL/PAGE/FILE)
-   Some themes use modtype_* instead of .content
-   ===================================================== */
 
-html.dark-mode .activityiconcontainer.modtype_url,
-body.dark-mode .activityiconcontainer.modtype_url,
-#page.dark-mode .activityiconcontainer.modtype_url,
-
-html.dark-mode .activityiconcontainer.modtype_page,
-body.dark-mode .activityiconcontainer.modtype_page,
-#page.dark-mode .activityiconcontainer.modtype_page,
-
-/* FILE is often "resource" in Moodle (and sometimes "file") */
-html.dark-mode .activityiconcontainer.modtype_resource,
-body.dark-mode .activityiconcontainer.modtype_resource,
-#page.dark-mode .activityiconcontainer.modtype_resource,
-
-html.dark-mode .activityiconcontainer.modtype_file,
-body.dark-mode .activityiconcontainer.modtype_file,
-#page.dark-mode .activityiconcontainer.modtype_file {
-  background-color: var(--activitycontent, #39ace2) !important;
-}
 
 
 /* Use Moodle vars (as seen in your computed styles); fall back if missing */
@@ -504,6 +482,29 @@ html.dark-mode .activityiconcontainer.interface,
 body.dark-mode .activityiconcontainer.interface,
 #page.dark-mode .activityiconcontainer.interface {
   background-color: var(--activityinterface, #a378ff) !important;
+}
+/* =====================================================
+   FIX missing icon plate colors for resources (URL/PAGE/FILE)
+   Some themes use modtype_* instead of .content
+   ===================================================== */
+
+html.dark-mode .activityiconcontainer.modtype_url,
+body.dark-mode .activityiconcontainer.modtype_url,
+#page.dark-mode .activityiconcontainer.modtype_url,
+
+html.dark-mode .activityiconcontainer.modtype_page,
+body.dark-mode .activityiconcontainer.modtype_page,
+#page.dark-mode .activityiconcontainer.modtype_page,
+
+/* FILE is often "resource" in Moodle (and sometimes "file") */
+html.dark-mode .activityiconcontainer.modtype_resource,
+body.dark-mode .activityiconcontainer.modtype_resource,
+#page.dark-mode .activityiconcontainer.modtype_resource,
+
+html.dark-mode .activityiconcontainer.modtype_file,
+body.dark-mode .activityiconcontainer.modtype_file,
+#page.dark-mode .activityiconcontainer.modtype_file {
+  background-color: var(--activitycontent, #39ace2) !important;
 }
 
 /* ---- remove rounding globally (safe set) ---- */

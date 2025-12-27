@@ -420,9 +420,9 @@ body.dark-mode #region-main > *,
 }
 
 /* Common Moodle white offenders */
-html.dark-mode #region-main .content:not(.activityiconcontainer),
-body.dark-mode #region-main .content:not(.activityiconcontainer),
-#page.dark-mode #region-main .content:not(.activityiconcontainer),
+html.dark-mode #region-main .content,
+body.dark-mode #region-main .content,
+#page.dark-mode #region-main .content,
 html.dark-mode #region-main .card-body,
 body.dark-mode #region-main .card-body,
 #page.dark-mode #region-main .card-body,
@@ -526,4 +526,29 @@ html.dark-mode .breadcrumb,
 html.dark-mode .courseindex .courseindex-item,
 html.dark-mode .section_availability.course-description-item {
   border-radius: var(--dm-radius) !important;
+}
+/* =====================================================
+   FORCE icon plate background for specific module types
+   (URL / PAGE / FILE / RESOURCE)
+   Put this at the VERY END so it wins.
+   ===================================================== */
+
+html.dark-mode li.modtype_url .activityiconcontainer,
+body.dark-mode li.modtype_url .activityiconcontainer,
+#page.dark-mode li.modtype_url .activityiconcontainer,
+
+html.dark-mode li.modtype_page .activityiconcontainer,
+body.dark-mode li.modtype_page .activityiconcontainer,
+#page.dark-mode li.modtype_page .activityiconcontainer,
+
+/* file often appears as "resource" */
+html.dark-mode li.modtype_resource .activityiconcontainer,
+body.dark-mode li.modtype_resource .activityiconcontainer,
+#page.dark-mode li.modtype_resource .activityiconcontainer,
+
+/* if your site uses modtype_file */
+html.dark-mode li.modtype_file .activityiconcontainer,
+body.dark-mode li.modtype_file .activityiconcontainer,
+#page.dark-mode li.modtype_file .activityiconcontainer {
+  background-color: var(--activitycontent, #39ace2) !important;
 }
