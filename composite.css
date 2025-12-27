@@ -16,6 +16,7 @@
   --dm-muted: #a7b0c0;
   --dm-link: #66ccff;
   --dm-button: #2b2b2b;
+  --dm-radius: 0;
 }
 /* ---- activate when ANY of these has .dark-mode ---- */
 html.dark-mode,
@@ -359,7 +360,8 @@ body.dark-mode .activity-item *:not(.activityiconcontainer):not(img.activityicon
   border: none !important;
   outline: none !important;
   box-shadow: none !important;
-  background-color: transparent !important; /* <-- add this */
+  background-color: transparent !important; /* <-- add this */  
+  border-radius: var(--dm-radius) !important;
 }
 /* =====================================================
    FIX REMAINING WHITE DESCRIPTIONS (SAFE)
@@ -495,5 +497,5 @@ html.dark-mode .navbar,
 html.dark-mode .breadcrumb,
 html.dark-mode .courseindex .courseindex-item,
 html.dark-mode .section_availability.course-description-item {
-  border-radius: 0 !important;
+  border-radius: var(--dm-radius) !important;
 }
