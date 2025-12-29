@@ -17,6 +17,7 @@
   --dm-link: #66ccff;
   --dm-button: #2b2b2b;
   --dm-radius: 0;
+  --activitycontent: #a81818;
 }
 /* ---- activate when ANY of these has .dark-mode ---- */
 html.dark-mode,
@@ -408,18 +409,19 @@ body.dark-mode ::-webkit-scrollbar-thumb,
   border-radius: 5px;
 }
 
+
 /* =====================================================
    NORMALIZE INNER BACKGROUNDS (CRITICAL)
    This replaces the spaghetti "nuke", but safely
    ===================================================== */
-
+/* 
 html.dark-mode #region-main > *,
 body.dark-mode #region-main > *,
 #page.dark-mode #region-main > * {
   background-color: transparent !important;
-}
+}/* Common Moodle white offenders 
 
-/* Common Moodle white offenders */
+
 html.dark-mode #region-main .content:not(.activityiconcontainer),
 body.dark-mode #region-main .content:not(.activityiconcontainer),
 #page.dark-mode #region-main .content:not(.activityiconcontainer),
@@ -433,7 +435,8 @@ html.dark-mode #region-main .description,
 body.dark-mode #region-main .description,
 #page.dark-mode #region-main .description {
   background-color: transparent !important;
-}
+} 
+*/
 
 
 
@@ -527,3 +530,4 @@ html.dark-mode .courseindex .courseindex-item,
 html.dark-mode .section_availability.course-description-item {
   border-radius: var(--dm-radius) !important;
 }
+
